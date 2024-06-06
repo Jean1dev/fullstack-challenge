@@ -16,10 +16,10 @@ Voce criar uma plataforma para vende de ingressos em um cinema
 
 ## :information_source: Etapa 1
  
-- [] escolha do filme
-    - [] Listar os 4 primeiros filmes da api /movie/now_playing voce pode ter o acesso em https://developer.themoviedb.org/reference/movie-now-playing-list . Os filmes sao trocados diariamente, entao todo os dias deve aparacer filmes diferentes
+- [ ] escolha do filme
+    - [ ] Listar os 4 primeiros filmes da api /movie/now_playing voce pode ter o acesso em https://developer.themoviedb.org/reference/movie-now-playing-list . Os filmes sao trocados diariamente, entao todo os dias deve aparacer filmes diferentes
 
-- [] sessao de compra de ingresso
+- [ ] sessao de compra de ingresso
     O tempo maximo para concluir a compra do ingresso eh 10minutos, se esse tempo for extrapolado a reserva dos assuntos deve ser liberada
     Cada filme tem 1 sala com 10 cadeiras disponiveis, permitir escolhar uma ou mais cadeiras, permitir escolher opcoes de combo por exemplo
         opt1: pipoca
@@ -29,7 +29,7 @@ Voce criar uma plataforma para vende de ingressos em um cinema
     selecao de meios de pagamento, permitir as opcoes cartao ou pix
 
 ## :information_source: Etapa 2
-- [] Controle de usuarios
+- [ ] Controle de usuarios
     - Permitir que o usuario se cadastre no sistema e faca login com esse usuario
     - Permitir que o usuario logado consulte suas compras 
     - Permitir que o usuario cancele seus ingressos comprados (caso isso ocorra nao esqueca de liberar a disponibilidade dos lugares)
