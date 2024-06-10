@@ -2,7 +2,7 @@
 Repositorio para ensinar e praticar conceitos fullStack para os mentorados
 
 ## :information_source: Objetivo
-Esse desafio fara voce aprender e praticar os principais pontos para construcao de uma apliacao fullStack
+Esse desafio fara voce aprender e praticar os principais pontos para construcao de uma aplicacao fullStack
 
 ## :information_source: Como participar
 Faca um fork desse projeto crie uma pasta com seu nome de usuario e comece o desenvolvimento dentro dela
@@ -10,9 +10,10 @@ Faca um fork desse projeto crie uma pasta com seu nome de usuario e comece o des
 ## :information_source: Definicao do projeto
 Front-end deve ser feito em ReactJS e o backend Java com SpringBoot na versao 3 ou superior
 O restante fica a seu criterio ( tipo de banco de dados.... )
-use sua criatividade para construir o melhor design e experiencia para o usuario
+use sua criatividade para construir o melhor design e experiencia para o usuario.
+
 Desafio Ingresso.com
-Voce criar uma plataforma para vende de ingressos em um cinema
+Voce deve criar uma plataforma para vender de ingressos em um cinema
 
 ## :information_source: Etapa 1
  
@@ -20,8 +21,8 @@ Voce criar uma plataforma para vende de ingressos em um cinema
     - [ ] Listar os 4 primeiros filmes da api /movie/now_playing voce pode ter o acesso em https://developer.themoviedb.org/reference/movie-now-playing-list . Os filmes sao trocados diariamente, entao todo os dias deve aparacer filmes diferentes
 
 - [ ] sessao de compra de ingresso
-    O tempo maximo para concluir a compra do ingresso eh 10minutos, se esse tempo for extrapolado a reserva dos assuntos deve ser liberada
-    Cada filme tem 1 sala com 10 cadeiras disponiveis, permitir escolhar uma ou mais cadeiras, permitir escolher opcoes de combo por exemplo
+    O tempo maximo para concluir a compra do ingresso eh 10 minutos, se esse tempo for extrapolado a reserva dos assentos deve ser liberada
+    Cada filme tem 1 sala com 10 cadeiras disponiveis, permitir escolher uma ou mais cadeiras, permitir escolher opcoes de combo por exemplo
         opt1: pipoca
         opt2: pipoca + refri
         opt3: pipoca + refri + chocolate.
