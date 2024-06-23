@@ -8,3 +8,6 @@ spring:
     active: dev
   jpa:
     open-in-view: false
+
+the-movie-db:
+  token: ${the_movie_db}
