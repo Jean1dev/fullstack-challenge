@@ -1,4 +1,4 @@
-package com.willian.AlpacaFilmes.domain.entities.themoviedb;
+package com.willian.AlpacaFilmes.domain.dto.themoviedb;
 
 public class Dates {
     private String maximum;

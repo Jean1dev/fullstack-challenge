@@ -1,4 +1,4 @@
-package com.willian.AlpacaFilmes.domain.entities.themoviedb;
+package com.willian.AlpacaFilmes.domain.dto.themoviedb;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
