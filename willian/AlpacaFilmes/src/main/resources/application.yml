@@ -1,1 +1,10 @@
-spring.application.name=AlpacaFilmes
+server:
+  port: 80
+
+spring:
+  application:
+    name: AlpacaFilmes
+  profiles:
+    active: dev
+  jpa:
+    open-in-view: flase
