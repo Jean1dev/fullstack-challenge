@@ -1,10 +1,11 @@
 package com.willian.AlpacaFilmes.application.services;
 
 import com.willian.AlpacaFilmes.application.exceptions.ApiResponseException;
+import com.willian.AlpacaFilmes.application.exceptions.ResourceNotFoundException;
+import com.willian.AlpacaFilmes.domain.dto.FilmeDTO;
 import com.willian.AlpacaFilmes.domain.entities.Filme;
 import com.willian.AlpacaFilmes.infra.repositories.FilmesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,5 +59,18 @@ public class FilmeServices {
                 logger.warning("Erro inesperado ao tentar salvar filmes: " + ex.getMessage());
             }
         }
+    }
+
+    public FilmeDTO findById(Long id) {
+        Filme filme = filmesRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Nenhum dado encontrado para o Id " + id + "1"));
+
+        return new FilmeDTO(filme);
+    }
+
+    public List<FilmeDTO> findAll() {
+        List<Filme> filmeList = filmesRepository.findAll();
+        List<FilmeDTO> filmeDTOList = filmeList.stream().map(FilmeDTO::new).toList();
+        return filmeDTOList;
     }
 }
