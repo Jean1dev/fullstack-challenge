@@ -40,7 +40,7 @@ public class FilmeServices {
                     }
                 }
                 logger.info("Filmes Atualizados");
-
+                attempts = MAX_RETRIES;
             } catch (ApiResponseException ae) {
                 attempts++;
                 logger.warning("Falha ao resgatar filmes. Tentativa " + attempts + " de " + MAX_RETRIES);
@@ -70,7 +70,6 @@ public class FilmeServices {
 
     public List<FilmeDTO> findAll() {
         List<Filme> filmeList = filmesRepository.findAll();
-        List<FilmeDTO> filmeDTOList = filmeList.stream().map(FilmeDTO::new).toList();
-        return filmeDTOList;
+        return filmeList.stream().map(FilmeDTO::new).toList();
     }
 }
