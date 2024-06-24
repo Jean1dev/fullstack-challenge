@@ -1,5 +1,6 @@
 package com.willian.AlpacaFilmes.application.services;
 
+import com.willian.AlpacaFilmes.application.exceptions.ApiResponseException;
 import com.willian.AlpacaFilmes.domain.dto.themoviedb.Movie;
 import com.willian.AlpacaFilmes.domain.dto.themoviedb.TheMovieDbResponse;
 import com.willian.AlpacaFilmes.domain.entities.Filme;
@@ -24,20 +25,20 @@ public class TheMovieDbServices {
     @Value("${the-movie-db.token}")
     private String accessToken;
 
-    public List<Filme> getMovies() {
+    public List<Filme> getMovies() throws ApiResponseException {
 
         List<Filme> filmes = List.of();
 
         try {
-            ResponseEntity<TheMovieDbResponse> result = theMovieDbRepository.getNowPlayingMovies("application/json", "Bearer " + accessToken);
+            ResponseEntity<TheMovieDbResponse> result = theMovieDbRepository.getNowPlayingMovies("application/json", "Bearer "+ accessToken);
             TheMovieDbResponse response = result.getBody();
 
             filmes = resgatarPrimeiros(response);
-        } catch (Exception e) {
-            logger.warning("Falha ao resgatar filmes" + e.getMessage());
-        }
 
-        return filmes;
+            return filmes;
+        } catch (Exception e) {
+            throw new ApiResponseException("Falha ao resgatar filmes: " + e.getMessage(), e);
+        }
     }
 
     private List<Filme> resgatarPrimeiros(TheMovieDbResponse response) {
