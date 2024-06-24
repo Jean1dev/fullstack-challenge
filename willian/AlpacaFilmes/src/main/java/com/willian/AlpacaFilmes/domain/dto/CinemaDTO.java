@@ -1,9 +1,11 @@
 package com.willian.AlpacaFilmes.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.willian.AlpacaFilmes.domain.entities.Cinema;
 
 import java.io.Serializable;
 
+@JsonRootName("cinema")
 public class CinemaDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
