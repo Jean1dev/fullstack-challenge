@@ -3,11 +3,13 @@ package com.willian.AlpacaFilmes.domain.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.willian.AlpacaFilmes.domain.entities.Filme;
 
 import java.io.Serializable;
 import java.util.Date;
 
+@JsonRootName("filmes")
 @JsonPropertyOrder({
         "id", "title", "overview", "poster_path", "original_title", "release_date"
 })
@@ -20,7 +22,7 @@ public class FilmeDTO implements Serializable {
     @JsonProperty("original_title")
     private String originalTitle;
 
-    @JsonProperty("original_title")
+    @JsonProperty("release_date")
     private String releaseDate;
 
     @JsonProperty("poster_path")
