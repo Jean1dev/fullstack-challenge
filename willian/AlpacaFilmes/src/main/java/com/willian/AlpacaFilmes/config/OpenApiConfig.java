@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 public class OpenApiConfig {
     @Bean
     OpenAPI customOpenAPI() {
-        return new OpenAPI().info(new Info().title("Order Swagger OpenAPI").version("V1")
-                .description("Some Description about yout API.").termsOfService("https://pub.willian.com.br/API")
+        return new OpenAPI().info(new Info().title("AlpacaFilmes API").version("V1")
+                .description("Alpaca Filmes Sistema de reserva para o cimema.").termsOfService("https://pub.willian.com.br/API")
                 .license(new License().name("Apache 2.0").url("https://pub.willian.com.br/API")));
     }
 }
