@@ -123,7 +123,7 @@ public class FilmesServicesTest {
         assertTrue(actualMessage.contains(expectedMessage), () ->"Deveria conter a mensagem " + expectedMessage);
     }
 
-    @DisplayName("teste ffind All quando buscar todos os filmes existentes deve retornar uma lista de objetos do tipo filmeDTO")
+    @DisplayName("teste find All quando buscar todos os filmes existentes deve retornar uma lista de objetos do tipo filmeDTO")
     @Test
     void testFindAll() {
         //Given / Arrange
