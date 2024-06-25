@@ -1,45 +1,38 @@
 package com.willian.AlpacaFilmes.domain.dto;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.willian.AlpacaFilmes.domain.entities.Cadeiras;
-import com.willian.AlpacaFilmes.domain.entities.Salas;
 import com.willian.AlpacaFilmes.domain.enums.CadeiraStatus;
 
 import java.io.Serializable;
 
 @JsonRootName("cadeiras")
-@JsonPropertyOrder({
-        "id", "numero", "status", "id_sala"
-})
 public class CadeirasDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
     private int numero;
+    @JsonProperty("status")
     private CadeiraStatus status;
-    private Salas sala;
 
     public CadeirasDTO() {
     }
 
-    public CadeirasDTO(Long id, int numero, CadeiraStatus status, Salas sala) {
+    public CadeirasDTO(Long id, int numero, CadeiraStatus status) {
         this.id = id;
         this.numero = numero;
         this.status = status;
-        this.sala = sala;
     }
 
     public CadeirasDTO(Cadeiras cadeiras) {
         this.id = cadeiras.getId();
         this.numero = cadeiras.getNumero();
         this.status = cadeiras.isStatus();
-        this.sala = cadeiras.getSala();
     }
 
     public static Cadeiras converter (CadeirasDTO cadeirasDTO) {
         Cadeiras cadeiras = new Cadeiras();
-        cadeiras.setSala(cadeirasDTO.getSala());
         cadeiras.setNumero(cadeirasDTO.getNumero());
         cadeiras.setStatus(cadeirasDTO.isStatus());
         return cadeiras;
@@ -61,6 +54,7 @@ public class CadeirasDTO implements Serializable {
         this.numero = numero;
     }
 
+
     public CadeiraStatus isStatus() {
         return status;
     }
@@ -69,11 +63,12 @@ public class CadeirasDTO implements Serializable {
         this.status = status;
     }
 
-    public Salas getSala() {
-        return sala;
-    }
-
-    public void setSala(Salas sala) {
-        this.sala = sala;
+    @Override
+    public String toString() {
+        return "CadeirasDTO{" +
+                "id=" + id +
+                ", numero=" + numero +
+                ", status=" + status +
+                '}';
     }
 }
