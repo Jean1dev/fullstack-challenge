@@ -54,6 +54,14 @@ public class Cadeiras implements Serializable {
         this.status = status;
     }
 
+    public Salas getSala() {
+        return sala;
+    }
+
+    public void setSala(Salas sala) {
+        this.sala = sala;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
