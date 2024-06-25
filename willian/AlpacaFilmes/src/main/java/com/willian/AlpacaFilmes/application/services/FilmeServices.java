@@ -57,13 +57,14 @@ public class FilmeServices {
                 }
             } catch (Exception ex) {
                 logger.warning("Erro inesperado ao tentar salvar filmes: " + ex.getMessage());
+                attempts = MAX_RETRIES;
             }
         }
     }
 
     public FilmeDTO findById(Long id) {
         Filme filme = filmesRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Nenhum dado encontrado para o Id " + id + "1"));
+                .orElseThrow(() -> new ResourceNotFoundException("Nenhum dado encontrado para o Id " + id + "!"));
 
         return new FilmeDTO(filme);
     }
