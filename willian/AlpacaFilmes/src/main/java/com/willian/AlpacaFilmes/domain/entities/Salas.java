@@ -1,5 +1,6 @@
 package com.willian.AlpacaFilmes.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -18,7 +19,8 @@ public class Salas implements Serializable {
     @Column
     private int numero;
 
-    @OneToMany(mappedBy = "sala", cascade = CascadeType.DETACH)
+    @OneToMany(mappedBy = "sala", cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Cadeiras> cadeiras;
 
 

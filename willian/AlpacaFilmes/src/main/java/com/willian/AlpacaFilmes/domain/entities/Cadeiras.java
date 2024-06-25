@@ -1,5 +1,6 @@
 package com.willian.AlpacaFilmes.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.willian.AlpacaFilmes.domain.enums.CadeiraStatus;
 import jakarta.persistence.*;
 
@@ -14,13 +15,17 @@ public class Cadeiras implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     private int numero;
+
     @Column
     @Enumerated(value = EnumType.STRING)
     private CadeiraStatus status;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sala")
+    @JsonBackReference
     private Salas sala;
 
     public Cadeiras() {
