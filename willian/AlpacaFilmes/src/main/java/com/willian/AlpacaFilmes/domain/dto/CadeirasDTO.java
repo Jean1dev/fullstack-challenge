@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.willian.AlpacaFilmes.domain.entities.Cadeiras;
 import com.willian.AlpacaFilmes.domain.entities.Salas;
+import com.willian.AlpacaFilmes.domain.enums.CadeiraStatus;
 
 import java.io.Serializable;
 
@@ -16,13 +17,13 @@ public class CadeirasDTO implements Serializable {
 
     private Long id;
     private int numero;
-    private boolean status;
+    private CadeiraStatus status;
     private Salas sala;
 
     public CadeirasDTO() {
     }
 
-    public CadeirasDTO(Long id, int numero, boolean status, Salas sala) {
+    public CadeirasDTO(Long id, int numero, CadeiraStatus status, Salas sala) {
         this.id = id;
         this.numero = numero;
         this.status = status;
@@ -60,11 +61,11 @@ public class CadeirasDTO implements Serializable {
         this.numero = numero;
     }
 
-    public boolean isStatus() {
+    public CadeiraStatus isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(CadeiraStatus status) {
         this.status = status;
     }
 

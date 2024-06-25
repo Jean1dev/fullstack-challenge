@@ -1,5 +1,6 @@
 package com.willian.AlpacaFilmes.domain.entities;
 
+import com.willian.AlpacaFilmes.domain.enums.CadeiraStatus;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -16,7 +17,8 @@ public class Cadeiras implements Serializable {
     @Column
     private int numero;
     @Column
-    private boolean status;
+    @Enumerated(value = EnumType.STRING)
+    private CadeiraStatus status;
     @ManyToOne
     @JoinColumn(name = "id_sala")
     private Salas sala;
@@ -24,7 +26,7 @@ public class Cadeiras implements Serializable {
     public Cadeiras() {
     }
 
-    public Cadeiras(Long id, int numero, boolean status) {
+    public Cadeiras(Long id, int numero, CadeiraStatus status) {
         this.id = id;
         this.numero = numero;
         this.status = status;
@@ -46,11 +48,11 @@ public class Cadeiras implements Serializable {
         this.numero = numero;
     }
 
-    public boolean isStatus() {
+    public CadeiraStatus isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(CadeiraStatus status) {
         this.status = status;
     }
 
