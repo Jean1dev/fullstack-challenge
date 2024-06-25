@@ -13,7 +13,7 @@ public class CinemaServices {
     @Autowired
     private CinemaRepository cinemaRepository;
 
-    public List<CinemaDTO> findALl() {
+    public List<CinemaDTO> findAll() {
         List<Cinema> cinemas = cinemaRepository.findAll();
         return cinemas.stream().map(CinemaDTO::new).toList();
     }
