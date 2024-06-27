@@ -32,8 +32,6 @@ public class CinemaControllerTest extends AbstractIntegrationTest {
     private static RequestSpecification specification;
     private static ObjectMapper objectMapper;
 
-    private CinemaDTO cinemaDTO;
-
     @BeforeAll
     public static void setup() {
         objectMapper = new ObjectMapper();
