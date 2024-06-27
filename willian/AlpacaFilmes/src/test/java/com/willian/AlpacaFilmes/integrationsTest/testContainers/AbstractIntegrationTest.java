@@ -13,19 +13,20 @@ import java.util.stream.Stream;
 
 @ContextConfiguration(initializers = AbstractIntegrationTest.Initializer.class)
 public class AbstractIntegrationTest {
+
     public static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-        static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:8.0.29");
+        static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0.29");
 
         private static void startContainers() {
-            Startables.deepStart(Stream.of(mySQLContainer)).join();
+            Startables.deepStart(Stream.of(mysql)).join();
         }
 
         private Map<String, String> createConnectionConfigurations() {
             return Map.of(
-                    "spring.datasource.url", mySQLContainer.getJdbcUrl(),
-                    "spring.datasource.username", mySQLContainer.getUsername(),
-                    "spring.datasource.password", mySQLContainer.getPassword()
+                    "spring.datasource.url", mysql.getJdbcUrl(),
+                    "spring.datasource.username", mysql.getUsername(),
+                    "spring.datasource.password", mysql.getPassword()
             );
         }
 
