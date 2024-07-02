@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class FilmeServices {
     Logger logger = Logger.getLogger(TheMovieDbServices.class.getName());
     private static final int MAX_RETRIES = 3;
-    private static final int RETRY_DELAY_MS = 60000;
+    private static final int RETRY_DELAY_MS = 10000;
 
     @Autowired
     private FilmesRepository filmesRepository;
@@ -25,12 +25,17 @@ public class FilmeServices {
     @Autowired
     private TheMovieDbServices movieDbServices;
 
+    private List<Filme> getFilmes() {
+        List<Filme> filmes = movieDbServices.getMovies();
+        return filmes;
+    }
+
     @Transactional
     public void salvarFilmes() {
         int attempts = 0;
         while(attempts < MAX_RETRIES) {
             try {
-                List<Filme> filmes = movieDbServices.getMovies();
+                List<Filme> filmes = getFilmes();
 
                 for (Filme filme : filmes) {
                     Optional<Filme> estaRegistrado = filmesRepository.findById(filme.getId());
@@ -45,16 +50,7 @@ public class FilmeServices {
                 attempts++;
                 logger.warning("Falha ao resgatar filmes. Tentativa " + attempts + " de " + MAX_RETRIES);
 
-                if (attempts >= MAX_RETRIES) {
-                    logger.warning("Número máximo de tentativas atingido. Abortando." + ae.getMessage());
-                }
-
-                try {
-                    Thread.sleep(RETRY_DELAY_MS);
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
-                    logger.warning("Thread interrompida" + ie);
-                }
+                verificaLimiteDeTentativas(ae, attempts);
             } catch (Exception ex) {
                 logger.warning("Erro inesperado ao tentar salvar filmes: " + ex.getMessage());
                 attempts = MAX_RETRIES;
@@ -72,5 +68,23 @@ public class FilmeServices {
     public List<FilmeDTO> findAll() {
         List<Filme> filmeList = filmesRepository.findAll();
         return filmeList.stream().map(FilmeDTO::new).toList();
+    }
+
+    private void verificaLimiteDeTentativas(ApiResponseException ae, int attempts) {
+        if (attempts >= MAX_RETRIES) {
+            logger.warning("Número máximo de tentativas atingido. Abortando." + ae.getMessage());
+            return;
+        }
+
+        threadSleep();
+    }
+
+    private void threadSleep() {
+        try {
+            Thread.sleep(RETRY_DELAY_MS);
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+            logger.warning("Thread interrompida" + ie);
+        }
     }
 }
