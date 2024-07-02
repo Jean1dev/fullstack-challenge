@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class FilmeServices {
     Logger logger = Logger.getLogger(TheMovieDbServices.class.getName());
     private static final int MAX_RETRIES = 3;
-    private static final int RETRY_DELAY_MS = 10000;
+    private static final int RETRY_DELAY_MS = 60000;
 
     @Autowired
     private FilmesRepository filmesRepository;
