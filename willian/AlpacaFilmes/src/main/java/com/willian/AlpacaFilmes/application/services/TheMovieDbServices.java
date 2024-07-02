@@ -19,8 +19,12 @@ import java.util.logging.Logger;
 public class TheMovieDbServices {
     Logger logger = Logger.getLogger(TheMovieDbServices.class.getName());
 
+    private final TheMovieDbRepository theMovieDbRepository;
+
     @Autowired
-    private TheMovieDbRepository theMovieDbRepository;
+    public TheMovieDbServices(TheMovieDbRepository theMovieDbRepository) {
+        this.theMovieDbRepository = theMovieDbRepository;
+    }
 
     @Value("${the-movie-db.token}")
     private String accessToken;
