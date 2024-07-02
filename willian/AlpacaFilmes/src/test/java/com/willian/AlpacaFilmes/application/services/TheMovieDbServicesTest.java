@@ -1,5 +1,6 @@
 package com.willian.AlpacaFilmes.application.services;
 
+import com.willian.AlpacaFilmes.application.exceptions.ApiResponseException;
 import com.willian.AlpacaFilmes.domain.dto.themoviedb.Movie;
 import com.willian.AlpacaFilmes.domain.dto.themoviedb.TheMovieDbResponse;
 import com.willian.AlpacaFilmes.domain.entities.Filme;
@@ -7,23 +8,21 @@ import com.willian.AlpacaFilmes.infra.clients.TheMovieDbRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
@@ -31,6 +30,7 @@ import static org.mockito.Mockito.when;
 @ActiveProfiles("test")
 @ExtendWith(MockitoExtension.class)
 //@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@RunWith(SpringJUnit4ClassRunner.class)
 public class TheMovieDbServicesTest {
 
     @MockBean
@@ -39,10 +39,18 @@ public class TheMovieDbServicesTest {
     @InjectMocks
     private TheMovieDbServices theMovieDbServices;
 
+    @BeforeEach
+    void setup() {
+        System.out.println("oi");
+        theMovieDbServices = new TheMovieDbServices(theMovieDbRepository);
+    }
+
     @DisplayName("Test Get Movies dando lista de filmes deve retornar uma lista de filmes")
     @Test
     public void testGetMovies() {
         //Given / Arrange
+        theMovieDbServices = new TheMovieDbServices(theMovieDbRepository);
+
         TheMovieDbResponse mockResponse = new TheMovieDbResponse();
         mockResponse.setResults(criarMovies());
 
@@ -62,6 +70,30 @@ public class TheMovieDbServicesTest {
         assertEquals("Overview for Movie 3", filmes.get(2).getOverview(), "A Overview do filme deveria ser: Overview for Movie 3");
         assertEquals("Title of Movie 4", filmes.get(3).getTitle(), () -> "O Titulo do filme deveria ser: Title of Movie 4");
         assertEquals("Overview for Movie 4", filmes.get(3).getOverview(), "A Overview do filme deveria ser: Overview for Movie 4");
+    }
+
+    @DisplayName("Test Get Movies passando Bad Request vazia deve apresentar exception")
+    @Test
+    public void testGetMoviesException() {
+        //Given / Arrange
+        ResponseEntity<TheMovieDbResponse> mockResponseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        when(theMovieDbRepository.getNowPlayingMovies(eq("application/json"), anyString())).thenReturn(mockResponseEntity);
+
+        String expectedMessage = "Falha ao resgatar filmes";
+
+        //When / Act
+
+        ApiResponseException exception = assertThrows(ApiResponseException.class,
+                () -> {
+                    theMovieDbServices.getMovies();
+                },
+                () -> "O Retorno com erro deve retornar um Api Response Exception"
+        );
+
+        String actualMessage = exception.getMessage();
+        //Then /Assert
+        assertTrue(actualMessage.contains(expectedMessage), () -> "A mensagem de error deveria conter: Falha ao resgatar filmes");
     }
 
     private List<Movie> criarMovies() {
