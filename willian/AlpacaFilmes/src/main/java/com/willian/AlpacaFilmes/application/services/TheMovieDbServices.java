@@ -13,12 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Service
 public class TheMovieDbServices {
-    Logger logger = Logger.getLogger(TheMovieDbServices.class.getName());
-
     private final TheMovieDbRepository theMovieDbRepository;
 
     @Autowired
@@ -31,10 +28,10 @@ public class TheMovieDbServices {
 
     public List<Filme> getMovies() throws ApiResponseException {
 
-        List<Filme> filmes = List.of();
+        List<Filme> filmes;
 
         try {
-            ResponseEntity<TheMovieDbResponse> result = theMovieDbRepository.getNowPlayingMovies("application/json", "Bearer "+ accessToken);
+            ResponseEntity<TheMovieDbResponse> result = theMovieDbRepository.getNowPlayingMovies("application/json", "Bearer " + this.accessToken);
             TheMovieDbResponse response = result.getBody();
 
             filmes = resgatarPrimeiros(response);
