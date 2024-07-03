@@ -1,6 +1,7 @@
 package com.willian.AlpacaFilmes.domain.entities;
 
-import com.willian.AlpacaFilmes.infra.listeners.FilmeTrailListener;
+import com.willian.AlpacaFilmes.common.events.FilmeEvent;
+import com.willian.AlpacaFilmes.infra.publisher.EventPublisher;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -9,7 +10,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "filmes")
-@EntityListeners(FilmeTrailListener.class)
 public class Filme implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -114,5 +114,10 @@ public class Filme implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, title, originalTitle, releaseDate, posterPath, overview, dataCadastro);
+    }
+
+    @PostPersist
+    public void novoFilmeADicionado() {
+        EventPublisher.publishEvent(new FilmeEvent(this));
     }
 }
