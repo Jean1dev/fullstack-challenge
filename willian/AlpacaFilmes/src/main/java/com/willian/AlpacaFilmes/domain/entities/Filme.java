@@ -1,5 +1,6 @@
 package com.willian.AlpacaFilmes.domain.entities;
 
+import com.willian.AlpacaFilmes.infra.listeners.FilmeTrailListener;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "filmes")
+@EntityListeners(FilmeTrailListener.class)
 public class Filme implements Serializable {
     private static final long serialVersionUID = 1L;
 
