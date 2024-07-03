@@ -1,5 +1,5 @@
 CREATE TABLE `filmes` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id`bigint NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(300) NULL,
   `original_title` VARCHAR(300) NULL,
   `release_date` VARCHAR(300) NULL,
