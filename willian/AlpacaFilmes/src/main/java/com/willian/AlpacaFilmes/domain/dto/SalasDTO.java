@@ -34,6 +34,7 @@ public class SalasDTO implements Serializable {
 
     public static Salas converter(SalasDTO salasDTO) {
         Salas salas = new Salas();
+        salas.setId(salasDTO.getId());
         salas.setNumero(salasDTO.getNumero());
         salas.setCadeiras(salasDTO.getCadeiras());
         return salas;
