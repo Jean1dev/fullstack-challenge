@@ -24,11 +24,12 @@ public class Programacao implements Serializable {
     @JoinColumn(name = "id_sala")
     private Salas sala;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_horario")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "programacao_horario", joinColumns = {@JoinColumn(name = "id_programacao")},
+            inverseJoinColumns = {@JoinColumn(name = "id_horario")})
     List<Horarios> horarios;
 
-    @Column
+    @Column(name = "data_cadastro")
     private Date dacaCadastro;
 
     public Programacao() {
