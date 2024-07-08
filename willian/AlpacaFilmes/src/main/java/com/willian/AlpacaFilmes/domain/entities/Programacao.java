@@ -27,10 +27,10 @@ public class Programacao implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "programacao_horario", joinColumns = {@JoinColumn(name = "id_programacao")},
             inverseJoinColumns = {@JoinColumn(name = "id_horario")})
-    List<Horarios> horarios;
+    private List<Horarios> horarios;
 
     @Column(name = "data_cadastro")
-    private Date dacaCadastro;
+    private Date dataCadastro;
 
     public Programacao() {
     }
@@ -40,7 +40,7 @@ public class Programacao implements Serializable {
         this.filme = filme;
         this.sala = sala;
         this.horarios = horarios;
-        this.dacaCadastro = dacaCadastro;
+        this.dataCadastro = dacaCadastro;
     }
 
     public Long getId() {
@@ -75,12 +75,12 @@ public class Programacao implements Serializable {
         this.horarios = horarios;
     }
 
-    public Date getDacaCadastro() {
-        return dacaCadastro;
+    public Date getDataCadastro() {
+        return dataCadastro;
     }
 
-    public void setDacaCadastro(Date dacaCadastro) {
-        this.dacaCadastro = dacaCadastro;
+    public void setDataCadastro(Date dacaCadastro) {
+        this.dataCadastro = dacaCadastro;
     }
 
     @Override
@@ -88,11 +88,11 @@ public class Programacao implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Programacao that = (Programacao) o;
-        return Objects.equals(id, that.id) && Objects.equals(filme, that.filme) && Objects.equals(sala, that.sala) && Objects.equals(horarios, that.horarios) && Objects.equals(dacaCadastro, that.dacaCadastro);
+        return Objects.equals(id, that.id) && Objects.equals(filme, that.filme) && Objects.equals(sala, that.sala) && Objects.equals(horarios, that.horarios) && Objects.equals(dataCadastro, that.dataCadastro);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, filme, sala, horarios, dacaCadastro);
+        return Objects.hash(id, filme, sala, horarios, dataCadastro);
     }
 }
