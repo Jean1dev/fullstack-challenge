@@ -28,11 +28,10 @@ public class CriarProgamacaoServices {
     private HorariosServices horariosServices;
 
     public void criarProgramacao(Filme filme) {
-        log.info("Filme: " + filme.getId());
-
         Programacao programacao = new Programacao();
+
         programacao.setFilme(filme);
-        programacao.setDacaCadastro(new Date());
+        programacao.setDataCadastro(new Date());
         programacao.setSala(pegarSala());
         programacao.setHorarios(pegarHorarios());
 
@@ -40,7 +39,7 @@ public class CriarProgamacaoServices {
     }
 
     @Transactional
-    public void salvar(Programacao programacao) {
+    private void salvar(Programacao programacao) {
         progamacaoRepository.save(programacao);
     }
 
@@ -61,11 +60,14 @@ public class CriarProgamacaoServices {
             }
         }
 
+        if (salaLivre.getId() == null) {
+            salaLivre = liberarSala();
+        }
+
         return salaLivre;
     }
 
     private boolean validaSalaLivre(Salas sala) {
-
         List<Programacao> programacaoList = progamacaoRepository.findTop4ByOrderByIdDesc();
 
         for (Programacao programacao : programacaoList) {
@@ -75,6 +77,12 @@ public class CriarProgamacaoServices {
         }
 
         return true;
+    }
+
+    private Salas liberarSala() {
+        List<Programacao> programacaoList = progamacaoRepository.findTop4ByOrderByIdDesc();
+
+        return programacaoList.getLast().getSala();
     }
 
     private List<Horarios> pegarHorarios() {
