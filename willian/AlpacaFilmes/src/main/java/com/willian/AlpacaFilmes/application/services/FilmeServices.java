@@ -54,7 +54,6 @@ public class FilmeServices {
                         filmesRepository.save(filme);
                     }
                 }
-                logger.info("Filmes Atualizados");
                 attempts = MAX_RETRIES;
             } catch (ApiResponseException ae) {
                 attempts++;
