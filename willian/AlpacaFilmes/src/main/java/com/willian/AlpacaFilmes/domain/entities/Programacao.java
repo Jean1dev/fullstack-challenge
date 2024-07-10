@@ -16,15 +16,15 @@ public class Programacao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_filme")
     private Filme filme;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_sala")
     private Salas sala;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "programacao_horario", joinColumns = {@JoinColumn(name = "id_programacao")},
             inverseJoinColumns = {@JoinColumn(name = "id_horario")})
     private List<Horarios> horarios;
