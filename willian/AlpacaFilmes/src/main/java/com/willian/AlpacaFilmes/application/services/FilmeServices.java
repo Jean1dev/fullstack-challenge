@@ -18,10 +18,8 @@ import java.util.logging.Logger;
 public class FilmeServices {
     Logger logger = Logger.getLogger(TheMovieDbServices.class.getName());
 
-    @Value("${retry.MAX_RETRIES}")
     private final int MAX_RETRIES;
 
-    @Value("${retry.RETRY_DELAY_MS}")
     private final int RETRY_DELAY_MS;
 
     @Autowired
@@ -30,7 +28,8 @@ public class FilmeServices {
     @Autowired
     private TheMovieDbServices movieDbServices;
 
-    public FilmeServices(int MAX_RETRIES, int RETRY_DELAY_MS) {
+    @Autowired
+    public FilmeServices(@Value("${retry.MAX_RETRIES}") int MAX_RETRIES, @Value("${retry.RETRY_DELAY_MS}") int RETRY_DELAY_MS) {
         this.MAX_RETRIES = MAX_RETRIES;
         this.RETRY_DELAY_MS = RETRY_DELAY_MS;
     }
