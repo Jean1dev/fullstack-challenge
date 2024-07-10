@@ -59,7 +59,7 @@ public class FilmeServices {
                 attempts = MAX_RETRIES;
             } catch (ApiResponseException ae) {
                 attempts++;
-                logger.warning("Falha ao resgatar filmes. Tentativa " + attempts + " de " + MAX_RETRIES);
+                logger.warning("Error na API: " + ae.getMessage());
 
                 verificaLimiteDeTentativas(ae, attempts);
             } catch (Exception ex) {
