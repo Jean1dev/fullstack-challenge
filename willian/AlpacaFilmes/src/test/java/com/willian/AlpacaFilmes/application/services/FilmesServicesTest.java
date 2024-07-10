@@ -39,6 +39,7 @@ public class FilmesServicesTest {
 
     @BeforeAll
     public void setUp() {
+        filmeServices = new FilmeServices(3, 100);
         filme = new Filme(12367L, "Teste de filme", "Film test", "2024-05-01",
                 "asdasdasda.jpg", "Esse é um modelo de overview", new Date());
     }

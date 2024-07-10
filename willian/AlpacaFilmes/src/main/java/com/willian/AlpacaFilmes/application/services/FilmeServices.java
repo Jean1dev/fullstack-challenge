@@ -6,6 +6,7 @@ import com.willian.AlpacaFilmes.domain.dto.FilmeDTO;
 import com.willian.AlpacaFilmes.domain.entities.Filme;
 import com.willian.AlpacaFilmes.infra.repositories.FilmesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,14 +17,23 @@ import java.util.logging.Logger;
 @Service
 public class FilmeServices {
     Logger logger = Logger.getLogger(TheMovieDbServices.class.getName());
-    private static final int MAX_RETRIES = 3;
-    private static final int RETRY_DELAY_MS = 60000;
+
+    @Value("${retry.MAX_RETRIES}")
+    private final int MAX_RETRIES;
+
+    @Value("${retry.RETRY_DELAY_MS}")
+    private final int RETRY_DELAY_MS;
 
     @Autowired
     private FilmesRepository filmesRepository;
 
     @Autowired
     private TheMovieDbServices movieDbServices;
+
+    public FilmeServices(int MAX_RETRIES, int RETRY_DELAY_MS) {
+        this.MAX_RETRIES = MAX_RETRIES;
+        this.RETRY_DELAY_MS = RETRY_DELAY_MS;
+    }
 
     private List<Filme> getFilmes() {
         List<Filme> filmes = movieDbServices.getMovies();
@@ -33,6 +43,7 @@ public class FilmeServices {
     @Transactional
     public void salvarFilmes() {
         int attempts = 0;
+
         while(attempts < MAX_RETRIES) {
             try {
                 List<Filme> filmes = getFilmes();
