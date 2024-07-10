@@ -2,10 +2,8 @@ package com.willian.AlpacaFilmes.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.willian.AlpacaFilmes.domain.entities.Filme;
 import com.willian.AlpacaFilmes.domain.entities.Horarios;
 import com.willian.AlpacaFilmes.domain.entities.Programacao;
-import com.willian.AlpacaFilmes.domain.entities.Salas;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,9 +15,9 @@ public class ProgramacaoDTO implements Serializable {
 
     private Long id;
 
-    private Filme filme;
+    private FilmeDTO filme;
 
-    private Salas sala;
+    private SalasDTO sala;
 
     private List<Horarios> horarios;
 
@@ -29,7 +27,7 @@ public class ProgramacaoDTO implements Serializable {
     public ProgramacaoDTO() {
     }
 
-    public ProgramacaoDTO(Long id, Filme filme, Salas sala, List<Horarios> horarios, Date dataCadastro) {
+    public ProgramacaoDTO(Long id, FilmeDTO filme, SalasDTO sala, List<Horarios> horarios, Date dataCadastro) {
         this.id = id;
         this.filme = filme;
         this.sala = sala;
@@ -39,8 +37,8 @@ public class ProgramacaoDTO implements Serializable {
 
     public ProgramacaoDTO(Programacao programacao) {
         this.id = programacao.getId();
-        this.filme = programacao.getFilme();
-        this.sala = programacao.getSala();
+        this.filme = new FilmeDTO(programacao.getFilme());
+        this.sala = new SalasDTO(programacao.getSala());
         this.horarios = programacao.getHorarios();
         this.dataCadastro = programacao.getDataCadastro();
     }
@@ -48,8 +46,8 @@ public class ProgramacaoDTO implements Serializable {
     public static Programacao converter(ProgramacaoDTO programacaoDTO) {
         Programacao programacao = new Programacao();
         programacao.setId(programacaoDTO.getId());
-        programacao.setFilme(programacaoDTO.getFilme());
-        programacao.setSala(programacaoDTO.getSala());
+        programacao.setFilme(FilmeDTO.converter(programacaoDTO.getFilme()));
+        programacao.setSala(SalasDTO.converter(programacaoDTO.getSala()));
         programacao.setHorarios(programacaoDTO.getHorarios());
         programacao.setDataCadastro(programacaoDTO.getDataCadastro());
         return programacao;
@@ -63,19 +61,19 @@ public class ProgramacaoDTO implements Serializable {
         this.id = id;
     }
 
-    public Filme getFilme() {
+    public FilmeDTO getFilme() {
         return filme;
     }
 
-    public void setFilme(Filme filme) {
+    public void setFilme(FilmeDTO filme) {
         this.filme = filme;
     }
 
-    public Salas getSala() {
+    public SalasDTO getSala() {
         return sala;
     }
 
-    public void setSala(Salas sala) {
+    public void setSala(SalasDTO sala) {
         this.sala = sala;
     }
 
