@@ -32,6 +32,7 @@
 		<spring-cloud.version>2023.0.2</spring-cloud.version>
 		<rest-assured.version>5.2.0</rest-assured.version>
 		<testcontainers.version>1.19.8</testcontainers.version>
+		<jacoco-maven.version>0.8.12</jacoco-maven.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -122,6 +123,26 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco-maven.version}</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
