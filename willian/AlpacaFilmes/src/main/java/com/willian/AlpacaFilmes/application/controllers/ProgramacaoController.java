@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/programacao")
+@RequestMapping("/v1/programacao")
 public class ProgramacaoController implements IProgramacaoController {
 
     @Autowired
