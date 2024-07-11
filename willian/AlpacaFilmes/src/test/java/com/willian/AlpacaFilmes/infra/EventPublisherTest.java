@@ -1,4 +1,4 @@
-package com.willian.AlpacaFilmes.unitTest;
+package com.willian.AlpacaFilmes.infra;
 
 import com.willian.AlpacaFilmes.infra.publisher.EventPublisher;
 import org.junit.Test;

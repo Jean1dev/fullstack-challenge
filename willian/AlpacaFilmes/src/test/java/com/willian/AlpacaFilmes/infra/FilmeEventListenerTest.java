@@ -1,4 +1,4 @@
-package com.willian.AlpacaFilmes.unitTest;
+package com.willian.AlpacaFilmes.infra;
 
 import com.willian.AlpacaFilmes.application.services.CriarProgamacaoServices;
 import com.willian.AlpacaFilmes.common.events.FilmeEvent;
