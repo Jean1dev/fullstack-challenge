@@ -94,7 +94,7 @@ public class SalasServicesTest {
 
         //Then /Assert
         assertNotNull(result, () -> "Não deveria retornar null");
-        assertNotNull(result.getId(), () -> "ID Should not return null");
+        assertNotNull(result.getId(), () -> "ID não deveria ser nulo");
         assertEquals(result.getNumero(), salas.getNumero(), () -> "O numero da sala retornada não é o mesmo da sala 1");
         assertEquals(result.getCadeiras(), salas.getCadeiras(), () -> "Cadeiras da sala retornada não é o mesmo da sala 1");
     }
