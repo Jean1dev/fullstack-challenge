@@ -1,6 +1,5 @@
 package com.willian.AlpacaFilmes.application.controllers;
 
-import com.willian.AlpacaFilmes.domain.dto.CinemaDTO;
 import com.willian.AlpacaFilmes.domain.dto.FilmeDTO;
 import com.willian.AlpacaFilmes.integrationsTest.configs.TestConfigs;
 import com.willian.AlpacaFilmes.integrationsTest.testContainers.AbstractIntegrationTest;
@@ -22,8 +21,8 @@ import java.io.IOException;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
@@ -57,7 +56,7 @@ public class FilmeControllerTest extends AbstractIntegrationTest {
 
     @Test
     @Order(1)
-    @DisplayName("Test when find all should return a list of Releases Object")
+    @DisplayName("Teste Encontrar todos deve retornar uma lista de FilmesDTO")
     public void testFindAll() throws IOException {
 
         List<FilmeDTO> content = given().spec(specification)
@@ -89,7 +88,7 @@ public class FilmeControllerTest extends AbstractIntegrationTest {
 
     @Test
     @Order(2)
-    @DisplayName("Teste buscar Por deve retornar um Objeto do tipo FilmeDTO")
+    @DisplayName("Teste buscar Por Id deve retornar um Objeto do tipo FilmeDTO")
     public void testFindById() throws IOException {
         String content = given().spec(specification)
                 .contentType(TestConfigs.CONTENT_TYPE_JSON)
