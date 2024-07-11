@@ -34,7 +34,7 @@ public class CinemaServicesTest {
 
     @BeforeAll
     public void setUp() {
-        cinema =new Cinema(1l, "Alpaca Cinema");
+        cinema =new Cinema(1L, "Alpaca Cinema");
     }
 
     @DisplayName("teste find All quando buscar todos os cinemas cadastrados deve retornar uma lista de objetos do tipo CinemaDTO")
@@ -50,7 +50,8 @@ public class CinemaServicesTest {
 
         //Then /Assert
         assertNotNull(result, () -> "Não deveria retornar null");
-        assertNotNull(cinemaDTO.getId(), () -> "ID Should not return null");
+        assertNotNull(cinemaDTO.getId(), () -> "ID não deveria ser nulo");
+        assertNotNull(cinemaDTO.getId(), () -> "ID não deveria ser nulo");
         assertEquals(cinemaDTO.getNome(), cinema.getNome(), () -> "O Nome do cinema retornado não é o mesmo do mock");
     }
 }
