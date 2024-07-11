@@ -101,7 +101,7 @@ public class FilmesServicesTest {
 
         //Then /Assert
         assertNotNull(result, () -> "Não deveria retornar null");
-        assertNotNull(result.getId(), () -> "ID Should not return null");
+        assertNotNull(result.getId(), () -> "ID não deveria ser nulo");
         assertEquals(result.getTitle(), filme.getTitle(), () -> "Os titulos do filme retornado não é o mesmo do mock");
         assertEquals(result.getId(), filme.getId(), () -> "Ids do filme retornado não é o mesmo do mock");
         assertEquals(result.getOverview(), filme.getOverview(), () -> "Overview do filme retornado não é o mesmo do mock");
@@ -141,12 +141,12 @@ public class FilmesServicesTest {
 
         //Then /Assert
         assertNotNull(result, () -> "Não deveria retornar null");
-        assertNotNull(filmeDTO1.getId(), () -> "ID Should not return null");
+        assertNotNull(filmeDTO1.getId(), () -> "ID não deveria ser nulo");
         assertEquals(filmeDTO1.getTitle(), filme.getTitle(), () -> "Os titulos do filme retornado não é o mesmo do mock");
         assertEquals(filmeDTO1.getId(), filme.getId(), () -> "Ids do filme retornado não é o mesmo do mock");
         assertEquals(filmeDTO1.getOverview(), filme.getOverview(), () -> "Overview do filme retornado não é o mesmo do mock");
 
-        assertNotNull(filmeDTO2.getId(), () -> "ID Should not return null");
+        assertNotNull(filmeDTO2.getId(), () -> "ID não deveria ser nulo");
         assertEquals(filmeDTO2.getTitle(), filme2.getTitle(), () -> "Os titulos do filme retornado não é o mesmo do filme 2");
         assertEquals(filmeDTO2.getId(), filme2.getId(), () -> "Ids do filme retornado não é o mesmo do ilme 2");
         assertEquals(filmeDTO2.getOverview(), filme2.getOverview(), () -> "Overview do filme retornado não é o mesmo do ilme 2");
