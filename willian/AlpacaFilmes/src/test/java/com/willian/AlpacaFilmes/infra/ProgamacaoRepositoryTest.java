@@ -31,8 +31,6 @@ public class ProgamacaoRepositoryTest extends AbstractIntegrationTest {
         List<Programacao> result = progamacaoRepository.findTop4ByOrderByIdDesc();
 
         // Then / Assert
-        /* Verificado se retorna 0 pois não existe migration ou dados cadastrados para programação
-        sem cadastrar filmes*/
-        assertEquals(0, result.size(), () -> "Veirifica se o repositorio está retornando");
+        assertEquals(4, result.size(), () -> "Veirifica se o repositorio está retornando");
     }
 }
