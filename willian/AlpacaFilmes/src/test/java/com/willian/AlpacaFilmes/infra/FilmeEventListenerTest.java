@@ -4,17 +4,15 @@ import com.willian.AlpacaFilmes.application.services.CriarProgamacaoServices;
 import com.willian.AlpacaFilmes.common.events.FilmeEvent;
 import com.willian.AlpacaFilmes.domain.entities.Filme;
 import com.willian.AlpacaFilmes.infra.listeners.FilmeEventListener;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.logging.Logger;
 
@@ -22,7 +20,6 @@ import static org.mockito.Mockito.*;
 
 @ActiveProfiles("test")
 @ExtendWith(MockitoExtension.class)
-@RunWith(SpringJUnit4ClassRunner.class)
 public class FilmeEventListenerTest {
 
     @Mock
