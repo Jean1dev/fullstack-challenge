@@ -4,13 +4,11 @@ import com.willian.AlpacaFilmes.domain.entities.Programacao;
 import com.willian.AlpacaFilmes.infra.repositories.ProgamacaoRepository;
 import com.willian.AlpacaFilmes.integrationsTest.testContainers.AbstractIntegrationTest;
 import jakarta.transaction.Transactional;
-import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
@@ -19,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 @Transactional
 @ActiveProfiles("test")
-@RunWith(SpringJUnit4ClassRunner.class)
 public class ProgamacaoRepositoryTest extends AbstractIntegrationTest {
 
     @Autowired
