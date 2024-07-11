@@ -69,7 +69,7 @@ public class FilmesServicesTest {
         List<Movie> invalidMovies = criarMovies();
         doReturn(invalidMovies).when(theMovieDbServices).getMovies();
 
-        //When / ActFilmeDTO result = filmeServices.findById(12367L);
+        //When / Act
         filmeServices.salvarFilmes();
 
         //Then /Assert
@@ -82,7 +82,7 @@ public class FilmesServicesTest {
         //Given / Arrange
         doThrow(new ApiResponseException("Erro na API")).when(theMovieDbServices).getMovies();
 
-        //When / ActFilmeDTO result = filmeServices.findById(12367L);
+        //When / Act
         filmeServices.salvarFilmes();
 
         //Then /Assert
