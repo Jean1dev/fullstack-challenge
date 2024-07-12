@@ -43,7 +43,7 @@ public class CriarProgamacaoServices {
         progamacaoRepository.save(programacao);
     }
 
-    private Salas pegarSala() {
+    protected Salas pegarSala() {
         List<Salas> salasList = salasServices
                 .findAll()
                 .stream()
@@ -67,7 +67,7 @@ public class CriarProgamacaoServices {
         return salaLivre;
     }
 
-    private boolean validaSalaLivre(Salas sala) {
+    protected boolean validaSalaLivre(Salas sala) {
         List<Programacao> programacaoList = progamacaoRepository.findTop4ByOrderByIdDesc();
 
         for (Programacao programacao : programacaoList) {
@@ -79,13 +79,13 @@ public class CriarProgamacaoServices {
         return true;
     }
 
-    private Salas liberarSala() {
+    protected Salas liberarSala() {
         List<Programacao> programacaoList = progamacaoRepository.findTop4ByOrderByIdDesc();
 
         return programacaoList.getLast().getSala();
     }
 
-    private List<Horarios> pegarHorarios() {
+    protected List<Horarios> pegarHorarios() {
         return horariosServices.pegarTodos();
     }
 }
