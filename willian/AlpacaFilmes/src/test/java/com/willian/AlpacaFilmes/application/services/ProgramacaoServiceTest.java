@@ -124,7 +124,7 @@ public class ProgramacaoServiceTest {
 
     private List<Horarios> criarHorarios() {
         List<Horarios> horarios = new ArrayList<>();
-        for (int i = 1; i < 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             horarios.add(new Horarios(Long.parseLong(String.valueOf(i)), "10:00", "13:00"));
         }
         return horarios;
@@ -133,7 +133,7 @@ public class ProgramacaoServiceTest {
     private List<Cadeiras> mockCadeiras() {
         List<Cadeiras> cadeirasList = new ArrayList<>();
 
-        for (int i = 1; i < 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             cadeirasList.add(new Cadeiras(Long.parseLong(String.valueOf(i)), i, CadeiraStatus.LIVRE));
         }
 
