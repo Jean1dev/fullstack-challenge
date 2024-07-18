@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(nullable = false, length = 50)
     private String nome;
@@ -21,17 +21,17 @@ public class Item {
     }
 
     public Item(Long id, String nome, Double preco) {
-        Id = id;
+        id = id;
         this.nome = nome;
         this.preco = preco;
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        id = id;
     }
 
     public String getNome() {
@@ -55,11 +55,11 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return Objects.equals(Id, item.Id) && Objects.equals(nome, item.nome) && Objects.equals(preco, item.preco);
+        return Objects.equals(id, item.id) && Objects.equals(nome, item.nome) && Objects.equals(preco, item.preco);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, nome, preco);
+        return Objects.hash(id, nome, preco);
     }
 }
