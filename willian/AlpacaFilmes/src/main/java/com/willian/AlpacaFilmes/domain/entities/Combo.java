@@ -2,12 +2,14 @@ package com.willian.AlpacaFilmes.domain.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "combo")
-public class Combo {
+public class Combo implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,7 +18,8 @@ public class Combo {
     private String nome;
 
     @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-    @JoinColumn(name = "combo_id")
+    @JoinTable(name = "combo_item", joinColumns = {@JoinColumn(name = "combo_id")},
+            inverseJoinColumns = {@JoinColumn(name = "item_id")})
     private List<Item> itens;
 
     @Column(nullable = false)
@@ -25,8 +28,9 @@ public class Combo {
     public Combo() {
     }
 
-    public Combo(Long id, List<Item> itens, Double preco) {
+    public Combo(Long id, String nome, List<Item> itens, Double preco) {
         this.id = id;
+        this.nome = nome;
         this.itens = itens;
         this.preco = preco;
     }
@@ -37,6 +41,14 @@ public class Combo {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public List<Item> getItens() {
@@ -60,11 +72,11 @@ public class Combo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Combo combo = (Combo) o;
-        return Objects.equals(id, combo.id) && Objects.equals(itens, combo.itens) && Objects.equals(preco, combo.preco);
+        return Objects.equals(id, combo.id) && Objects.equals(nome, combo.nome) && Objects.equals(itens, combo.itens) && Objects.equals(preco, combo.preco);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, itens, preco);
+        return Objects.hash(id, nome, itens, preco);
     }
 }
