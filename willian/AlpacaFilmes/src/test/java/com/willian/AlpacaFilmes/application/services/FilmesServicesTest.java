@@ -97,7 +97,7 @@ public class FilmesServicesTest {
     	doReturn(Optional.of(filme)).when(filmesRepository).findById(anyLong());
 
     	//When / Act
-        FilmeDTO result = filmeServices.findById(12367L);
+        FilmeDTO result = filmeServices.buscarPorId(12367L);
 
         //Then /Assert
         assertNotNull(result, () -> "Não deveria retornar null");
@@ -115,7 +115,7 @@ public class FilmesServicesTest {
 
         //When / Act
         ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> {
-            filmeServices.findById(123L);
+            filmeServices.buscarPorId(123L);
         }, () -> "Should be a exception");
 
         String actualMessage = exception.getMessage();
@@ -134,7 +134,7 @@ public class FilmesServicesTest {
         doReturn(List.of(filme, filme2)).when(filmesRepository).findAll();
 
         //When / Act
-        List<FilmeDTO> result = filmeServices.findAll();
+        List<FilmeDTO> result = filmeServices.buscarTodos();
 
         FilmeDTO filmeDTO1 = result.getFirst();
         FilmeDTO filmeDTO2 = result.get(1);
@@ -159,7 +159,7 @@ public class FilmesServicesTest {
         doReturn(Collections.EMPTY_LIST).when(filmesRepository).findAll();
 
         //When / Act
-        List<FilmeDTO> result = filmeServices.findAll();
+        List<FilmeDTO> result = filmeServices.buscarTodos();
 
         //Then /Assert
         assertTrue(result.isEmpty(), () -> "A lista de filmes deveria ser vazia");

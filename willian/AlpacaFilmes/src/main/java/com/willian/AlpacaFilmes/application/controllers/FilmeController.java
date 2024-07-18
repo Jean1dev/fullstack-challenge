@@ -25,7 +25,7 @@ public class FilmeController implements IFilmeController {
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FilmeDTO>> buscarTodos() {
-        List<FilmeDTO> filmeDTOList = filmeServices.findAll();
+        List<FilmeDTO> filmeDTOList = filmeServices.buscarTodos();
         return ResponseEntity.ok().body(filmeDTOList);
     }
 
@@ -33,7 +33,7 @@ public class FilmeController implements IFilmeController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FilmeDTO> buscarPorId(@PathVariable(value = "id") Long id) {
         logger.info("id " + id);
-        FilmeDTO filmeDTO = filmeServices.findById(id);
+        FilmeDTO filmeDTO = filmeServices.buscarPorId(id);
         return ResponseEntity.ok().body(filmeDTO);
     }
 }

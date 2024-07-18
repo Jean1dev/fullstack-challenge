@@ -34,7 +34,7 @@ public class FilmeServices {
         this.RETRY_DELAY_MS = RETRY_DELAY_MS;
     }
 
-    private List<Filme> pegarTosos() {
+    private List<Filme> pegarTodos() {
         List<Filme> filmes = movieDbServices.getMovies();
         return filmes;
     }
@@ -45,7 +45,7 @@ public class FilmeServices {
 
         while(attempts < MAX_RETRIES) {
             try {
-                List<Filme> filmes = pegarTosos();
+                List<Filme> filmes = pegarTodos();
 
                 for (Filme filme : filmes) {
                     Optional<Filme> estaRegistrado = filmesRepository.findById(filme.getId());
@@ -67,14 +67,14 @@ public class FilmeServices {
         }
     }
 
-    public FilmeDTO findById(Long id) {
+    public FilmeDTO buscarPorId(Long id) {
         Filme filme = filmesRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Nenhum dado encontrado para o Id " + id + "!"));
 
         return new FilmeDTO(filme);
     }
 
-    public List<FilmeDTO> findAll() {
+    public List<FilmeDTO> buscarTodos() {
         List<Filme> filmeList = filmesRepository.findAll();
         return filmeList.stream().map(FilmeDTO::new).toList();
     }
