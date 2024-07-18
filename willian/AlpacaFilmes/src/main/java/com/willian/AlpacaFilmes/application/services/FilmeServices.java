@@ -34,7 +34,7 @@ public class FilmeServices {
         this.RETRY_DELAY_MS = RETRY_DELAY_MS;
     }
 
-    private List<Filme> getFilmes() {
+    private List<Filme> pegarTosos() {
         List<Filme> filmes = movieDbServices.getMovies();
         return filmes;
     }
@@ -45,7 +45,7 @@ public class FilmeServices {
 
         while(attempts < MAX_RETRIES) {
             try {
-                List<Filme> filmes = getFilmes();
+                List<Filme> filmes = pegarTosos();
 
                 for (Filme filme : filmes) {
                     Optional<Filme> estaRegistrado = filmesRepository.findById(filme.getId());

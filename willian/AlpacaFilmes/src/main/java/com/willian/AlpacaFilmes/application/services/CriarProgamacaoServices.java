@@ -45,7 +45,7 @@ public class CriarProgamacaoServices {
 
     protected Salas pegarSala() {
         List<Salas> salasList = salasServices
-                .findAll()
+                .pegarTodos()
                 .stream()
                 .map(SalasDTO::converter)
                 .toList();

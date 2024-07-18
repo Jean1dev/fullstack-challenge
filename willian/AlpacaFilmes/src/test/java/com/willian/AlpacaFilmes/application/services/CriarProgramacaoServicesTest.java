@@ -54,7 +54,7 @@ public class CriarProgramacaoServicesTest {
     @DisplayName("Teste criar programação dando um objeto do tipo filme")
     public void testCriarProgrmaca_DandoObjetoFilme() {
         //Given / Arrange
-        doReturn(salas).when(salasServices).findAll();
+        doReturn(salas).when(salasServices).pegarTodos();
         doReturn(horarios).when(horariosServices).pegarTodos();
 
         //When / Act
@@ -68,7 +68,7 @@ public class CriarProgramacaoServicesTest {
     @DisplayName("Teste pegar sala quando criar uma programação")
     public void testPegarSala_QuandoCriar() {
         //Given / Arrange
-        when(salasServices.findAll()).thenReturn(salas);
+        when(salasServices.pegarTodos()).thenReturn(salas);
 
         //When / Act
         Salas result = progamacaoServices.pegarSala();
