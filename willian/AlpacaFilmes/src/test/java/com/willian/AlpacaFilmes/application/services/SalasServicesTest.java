@@ -53,7 +53,7 @@ public class SalasServicesTest {
         doReturn(List.of(salas, salas1)).when(salasRepository).findAll();
 
     	//When / Act
-        List<SalasDTO> result = salasServices.findAll();
+        List<SalasDTO> result = salasServices.pegarTodos();
 
         SalasDTO salasDTO = result.getFirst();
         SalasDTO salasDTO1 = result.get(1);
@@ -77,7 +77,7 @@ public class SalasServicesTest {
         doReturn(Collections.EMPTY_LIST).when(salasRepository).findAll();
 
         //When / Act
-        List<SalasDTO> result = salasServices.findAll();
+        List<SalasDTO> result = salasServices.pegarTodos();
 
         //Then /Assert
         assertTrue(result.isEmpty(), () -> "A lista de filmes deveria ser vazia");
@@ -90,7 +90,7 @@ public class SalasServicesTest {
         doReturn(Optional.of(salas)).when(salasRepository).findById(anyLong());
 
         //When / Act
-        SalasDTO result = salasServices.findById(1L);
+        SalasDTO result = salasServices.pegarPorId(1L);
 
         //Then /Assert
         assertNotNull(result, () -> "Não deveria retornar null");
@@ -107,7 +107,7 @@ public class SalasServicesTest {
 
         //When / Act
         ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> {
-            salasServices.findById(12L);
+            salasServices.pegarPorId(12L);
         }, () -> "Should be a exception");
 
         String actualMessage = exception.getMessage();
@@ -127,7 +127,7 @@ public class SalasServicesTest {
         Cadeiras cadeira1 = cadeirasList.get(2);
 
         //When / Act
-        List<CadeirasDTO> result = salasServices.findCadeirasSalas(1L);
+        List<CadeirasDTO> result = salasServices.buscarCadeirasSalas(1L);
 
         CadeirasDTO cadeirasDTO = result.getFirst();
         CadeirasDTO cadeirasDTO1 = result.get(2);
@@ -151,7 +151,7 @@ public class SalasServicesTest {
 
         //When / Act
         ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> {
-            salasServices.findCadeirasSalas(12L);
+            salasServices.buscarCadeirasSalas(12L);
         }, () -> "Should be a exception");
 
         String actualMessage = exception.getMessage();

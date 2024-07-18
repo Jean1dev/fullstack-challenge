@@ -26,21 +26,21 @@ public class SalasController implements ISalaController {
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<SalasDTO>> buscarTodos() {
-        List<SalasDTO> salasDTO = salasServices.findAll();
+        List<SalasDTO> salasDTO = salasServices.pegarTodos();
         return ResponseEntity.ok().body(salasDTO);
     }
 
     @Override
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SalasDTO> buscarPorId(@PathVariable(value = "id") Long id) {
-        SalasDTO salasDTO = salasServices.findById(id);
+        SalasDTO salasDTO = salasServices.pegarPorId(id);
         return ResponseEntity.ok().body(salasDTO);
     }
 
     @Override
     @GetMapping(value = "/{id}/cadeiras", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CadeirasDTO>> buscarCadeiras(@PathVariable(value = "id") Long id) {
-        List<CadeirasDTO> cadeirasDTOS = salasServices.findCadeirasSalas(id);
+        List<CadeirasDTO> cadeirasDTOS = salasServices.buscarCadeirasSalas(id);
         return ResponseEntity.ok().body(cadeirasDTOS);
     }
 }

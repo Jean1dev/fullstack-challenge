@@ -20,12 +20,12 @@ public class SalasServices {
     @Autowired
     private SalasRepository salasRepository;
 
-    public List<SalasDTO> findAll() {
+    public List<SalasDTO> pegarTodos() {
         List<Salas> salasList = salasRepository.findAll();
         return salasList.stream().map(SalasDTO::new).toList();
     }
 
-    public List<CadeirasDTO> findCadeirasSalas(Long id) {
+    public List<CadeirasDTO> buscarCadeirasSalas(Long id) {
         Salas salas = salasRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Nenhum dado encontrado para o Id: " + id + "!"));
 
@@ -35,7 +35,7 @@ public class SalasServices {
                 .collect(Collectors.toList());
     }
 
-    public SalasDTO findById(Long id) {
+    public SalasDTO pegarPorId(Long id) {
         Salas salas = salasRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Nenhum dado encontrado para o Id: " + id + "!"));
         return new SalasDTO(salas);
