@@ -44,7 +44,7 @@ public class CinemaServicesTest {
         doReturn(List.of(cinema)).when(cinemaRepository).findAll();
 
         //When / Act
-        List<CinemaDTO> result = cinemaServices.findAll();
+        List<CinemaDTO> result = cinemaServices.pegarTosdos();
 
         CinemaDTO cinemaDTO = result.getFirst();
 

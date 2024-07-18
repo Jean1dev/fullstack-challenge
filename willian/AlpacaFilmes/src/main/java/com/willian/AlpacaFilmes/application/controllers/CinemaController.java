@@ -21,7 +21,7 @@ public class CinemaController implements ICinemaController {
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CinemaDTO>> resgatarCinema() {
-        List<CinemaDTO> cinemas = cinemaServices.findAll();
+        List<CinemaDTO> cinemas = cinemaServices.pegarTosdos();
         return ResponseEntity.ok().body(cinemas);
     }
 }

@@ -13,7 +13,7 @@ public class CinemaServices {
     @Autowired
     private CinemaRepository cinemaRepository;
 
-    public List<CinemaDTO> findAll() {
+    public List<CinemaDTO> pegarTosdos() {
         List<Cinema> cinemas = cinemaRepository.findAll();
         return cinemas.stream().map(CinemaDTO::new).toList();
     }
