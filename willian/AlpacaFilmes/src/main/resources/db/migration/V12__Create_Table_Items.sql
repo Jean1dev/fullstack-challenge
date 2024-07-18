@@ -1,0 +1,6 @@
+CREATE TABLE `item` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `nome` VARCHAR(50) NOT NULL,
+    `preco` DOUBLE NOT NULL,
+    PRIMARY KEY (`id`)
+);
