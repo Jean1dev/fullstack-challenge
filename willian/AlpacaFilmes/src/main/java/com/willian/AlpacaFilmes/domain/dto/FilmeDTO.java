@@ -58,6 +58,7 @@ public class FilmeDTO implements Serializable {
 
     public static Filme converter(FilmeDTO filmeDTO) {
         Filme filme = new Filme();
+        filme.setId(filmeDTO.getId());
         filme.setTitle(filmeDTO.getTitle());
         filme.setOverview(filmeDTO.getOverview());
         filme.setPosterPath(filmeDTO.getPosterPath());
