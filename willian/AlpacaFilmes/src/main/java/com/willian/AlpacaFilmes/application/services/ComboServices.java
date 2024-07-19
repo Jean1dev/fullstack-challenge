@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ComboService {
+public class ComboServices {
     @Autowired
     private ComboRepository comboRepository;
 

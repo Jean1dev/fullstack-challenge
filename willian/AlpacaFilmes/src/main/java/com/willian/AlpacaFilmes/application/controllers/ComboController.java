@@ -1,7 +1,7 @@
 package com.willian.AlpacaFilmes.application.controllers;
 
 import com.willian.AlpacaFilmes.application.controllers.interfaces.IComboController;
-import com.willian.AlpacaFilmes.application.services.ComboService;
+import com.willian.AlpacaFilmes.application.services.ComboServices;
 import com.willian.AlpacaFilmes.domain.dto.ComboDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/v1/combos")
 public class ComboController implements IComboController {
     @Autowired
-    private ComboService comboService;
+    private ComboServices comboService;
 
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
