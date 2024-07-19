@@ -25,6 +25,13 @@ public class ItemComboDTO implements Serializable {
         this.nome = item.getNome();
     }
 
+    public static Item converter(ItemComboDTO itemComboDTO) {
+        Item item = new Item();
+        item.setNome(itemComboDTO.getNome());
+        item.setId(itemComboDTO.getId());
+        return item;
+    }
+
     public Long getId() {
         return id;
     }
