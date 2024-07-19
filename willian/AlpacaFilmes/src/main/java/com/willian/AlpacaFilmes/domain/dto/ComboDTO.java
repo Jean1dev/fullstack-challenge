@@ -28,6 +28,16 @@ public class ComboDTO implements Serializable {
         this.preco = preco;
     }
 
+    public static Combo converter(ComboDTO comboDTO) {
+        Combo combo = new Combo();
+        combo.setId(comboDTO.getId());
+        combo.setNome(comboDTO.getNome());
+        combo.setPreco(comboDTO.getPreco());
+        List<Item> itensList = comboDTO.getItens().stream().map(ItemComboDTO::converter).toList();
+        combo.setItens(itensList);
+        return combo;
+    }
+
     public ComboDTO(Combo combo) {
         this.id = combo.getId();
         this.nome = combo.getNome();
