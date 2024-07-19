@@ -23,7 +23,7 @@ public class Item implements Serializable {
     }
 
     public Item(Long id, String nome, Double preco) {
-        id = id;
+        this.id = id;
         this.nome = nome;
         this.preco = preco;
     }
@@ -33,7 +33,7 @@ public class Item implements Serializable {
     }
 
     public void setId(Long id) {
-        id = id;
+        this.id = id;
     }
 
     public String getNome() {
