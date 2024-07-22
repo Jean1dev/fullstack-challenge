@@ -71,7 +71,8 @@ public class CriarProgamacaoServices {
         List<Programacao> programacaoList = progamacaoRepository.findTop4ByOrderByIdDesc();
 
         for (Programacao programacao : programacaoList) {
-            if (sala == programacao.getSala()) {
+
+            if (sala.equals(programacao.getSala())) {
                 return false;
             }
         }
