@@ -27,7 +27,7 @@ public class FilmeEventListener {
         try {
             progamacaoServices.criarProgramacao(filme);
         } catch (Exception e) {
-            logger.warning("Conflito ao criar programação para o filme: " + filme.getId());
+            logger.warning("Conflito ao criar programação para o filme: " + filme.getId() + "Error: " + e.getMessage());
         }
     }
 
