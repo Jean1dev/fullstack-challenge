@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${SPRING.DATASOURCE.URL}
+    username: ${SPRING.DATASOURCE.USERNAME}
+    password: ${SPRING.DATASOURCE.PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: false
+
+retry:
+  MAX_RETRIES: 3
+  RETRY_DELAY_MS: 60000
