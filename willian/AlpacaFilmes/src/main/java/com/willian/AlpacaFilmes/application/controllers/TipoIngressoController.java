@@ -30,7 +30,7 @@ public class TipoIngressoController implements ITipoIngressoController {
     @Override
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TipoIngressoDTO> buscarPorId(@PathVariable(value = "id") Long id) {
-        TipoIngressoDTO tipoIngressoDTO = tipoIngressoServices.bucarPorId(id);
+        TipoIngressoDTO tipoIngressoDTO = tipoIngressoServices.buscarPorId(id);
         return ResponseEntity.ok().body(tipoIngressoDTO);
     }
 }

@@ -20,7 +20,7 @@ public class TipoIngressoServices {
         return tipoIngressoList.stream().map(TipoIngressoDTO::new).toList();
     }
 
-    public TipoIngressoDTO bucarPorId(Long id) {
+    public TipoIngressoDTO buscarPorId(Long id) {
         TipoIngresso tipoIngresso = tipoIngressoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Nenhum dado encontrado para o Id " + id + "!"));
         return new TipoIngressoDTO(tipoIngresso);
