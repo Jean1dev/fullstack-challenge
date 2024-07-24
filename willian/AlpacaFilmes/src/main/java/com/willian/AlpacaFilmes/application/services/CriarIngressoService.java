@@ -69,7 +69,7 @@ public class CriarIngressoService {
     }
 
     public TipoIngresso pegarTipoIngresso(Long tipoIngressoId) {
-        TipoIngressoDTO tipoIngresso = tipoIngressoServices.bucarPorId(tipoIngressoId);
+        TipoIngressoDTO tipoIngresso = tipoIngressoServices.buscarPorId(tipoIngressoId);
         return TipoIngressoDTO.converter(tipoIngresso);
     }
 }
