@@ -74,6 +74,6 @@ public class FilmeEventListenerTest {
 
         //Then /Assert
         verify(progamacaoServices, times(1)).criarProgramacao(filme);
-        verify(logger, times(1)).warning("Conflito ao criar programação para o filme: " + filme.getId());
+        verify(logger, times(1)).warning("Conflito ao criar programação para o filme: 2Error: Simulated exception");
     }
 }
