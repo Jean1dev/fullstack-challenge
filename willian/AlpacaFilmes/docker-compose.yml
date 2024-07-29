@@ -26,9 +26,10 @@ services:
     working_dir: /app
     environment:
       TZ: America\Sao_paulo
-      SPRING.DATASOURCE.URL: jdbc:mysql://db:3307/alpaca_filmes?useTimezone=true&serverTimezone=UTC
-      SPRING.DATASOURCE.USERNAME: root
-      SPRING.DATASOURCE.PASSWORD: root
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/alpaca_filmes?useTimezone=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      the_movie_db: ${SUA_KEY_DO_THE_MOVEI_DB}
     ports:
       - 80:8080
     depends_on:
@@ -37,4 +38,3 @@ services:
       - willian-network
 networks:
   willian-network:
-    driver: bridge
