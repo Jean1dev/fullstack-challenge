@@ -2,7 +2,7 @@ export interface Filme {
   id: number;
   title: string;
   originalTitle: string;
-  releaseDate: string;
+  releaseDate: Date;
   posterPath: string;
   overview: string;
 }
