@@ -1,11 +1,8 @@
 import React from "react";
+import Home from "./Home";
 
 const App = () => {
-  return (
-    <div className="p-4">
-      <p>Alpaca Cinemas</p>
-    </div>
-  );
+  return <Home />;
 };
 
 export default App;
