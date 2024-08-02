@@ -1,9 +1,8 @@
 import React from "react";
-import "./App.module.css";
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="p-4">
       <p>Alpaca Cinemas</p>
     </div>
   );
