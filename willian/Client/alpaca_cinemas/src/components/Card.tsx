@@ -1,8 +1,10 @@
 import React from "react";
 import { CardProps } from "../common/types/CardProps";
 import { formatDateToBrazilian } from "../common/utils/DataConverter";
+import { useNavigate } from "react-router-dom";
 
-const Card: React.FC<CardProps> = ({ filme }) => {
+const Card: React.FC<CardProps> = ({ filme, idProgramacao }) => {
+  const navigate = useNavigate();
   return (
     <div className="card bg-base-100 w-96 shadow-xl bg-custom-gray">
       <figure>
@@ -18,7 +20,10 @@ const Card: React.FC<CardProps> = ({ filme }) => {
           <button className="btn btn-primary hover:text-gray-100 bg-custom-blue text-custom-dark-blue border-0">
             Comprar ingresso
           </button>
-          <button className="btn btn-outline text-white border-white">
+          <button
+            className="btn btn-outline text-white border-white"
+            onClick={() => navigate(`/programacao-details/${idProgramacao}`)}
+          >
             Ver mais
           </button>
         </div>

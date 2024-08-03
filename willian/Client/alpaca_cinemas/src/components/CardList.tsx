@@ -11,7 +11,11 @@ const CardList = () => {
   return (
     <div className="flex flex-wrap justify-center gap-4">
       {programacoes!.map((programacao) => (
-        <Card key={programacao.id} filme={programacao.filme} />
+        <Card
+          key={programacao.id}
+          filme={programacao.filme}
+          idProgramacao={programacao.id}
+        />
       ))}
     </div>
   );
