@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const isLogged = false;
+  const navigate = useNavigate();
 
   return (
     <div className="navbar bg-custom-dark-blue">
@@ -28,12 +30,12 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-custom-dark-blue rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Home</a>
+              <Link to="/">Home</Link>
             </li>
             {!isLogged ? (
               <>
                 <li>
-                  <a>Login</a>
+                  <Link to="">Login</Link>
                 </li>
                 <li>
                   <a className="btn bg-custom-gray border-0 text-white">
@@ -46,12 +48,14 @@ const Navbar = () => {
             )}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Alpaca Filmes</a>
+        <Link className="btn btn-ghost text-xl" to="/">
+          Alpaca Filmes
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Home</a>
+            <Link to="/">Home</Link>
           </li>
         </ul>
       </div>
@@ -90,8 +94,10 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            <a>Login</a>
-            <a className="btn text-white bg-custom-gray border-0">Seja Mebro</a>
+            <Link to="/">Login</Link>
+            <a className="btn btn-primary text-white bg-custom-blue border-0 hover:text-gray-100">
+              Seja Mebro
+            </a>
           </>
         )}
       </div>
