@@ -10,14 +10,20 @@ const initialState: ProgramacaoState = {
         originalTitle: "Título Original 1",
         releaseDate: new Date(),
         posterPath: "uH6zs1QHQm9U0z4q2XP6wDkWd3N.jpg",
-        overview: "Descrição do filme 1"
+        overview:
+          "Nesta aguardada sequência de X - A Marca da Morte (2022) e Pearl (2022), Mia Goth reprisa seu papel como a determinada aspirante a atriz, Maxine Minx. Como única sobrevivente de uma filmagem pornô que deu errado há alguns anos, ela decide seguir sua jornada rumo à fama mesmo depois do acontecido. Agora, na década de 1980, em Hollywood, a estrela de cinema adulto começa a fazer testes para papéis no cinema e consegue uma vaga em uma sequência de terror de baixo orçamento, agarrando a oportunidade com todas as suas forças. Mas enquanto isso, Maxine se torna alvo da investigação de um detetive particular e um misterioso assassino, conhecido como Night Stalker, persegue as estrelas de Hollywood, deixando um rastro de sangue que ameaça revelar o passado sinistro de Maxine. Porém, ela não pretende deixar que esses problemas impactem sua bela carreira."
       },
       sala: {
         id: 1,
         numero: 1,
         cadeiras: []
       },
-      horarios: [{ id: 1, horaInicio: "10:00", horaFim: "12:00" }]
+      horarios: [
+        { id: 1, horaInicio: "10:00", horaFim: "12:00" },
+        { id: 1, horaInicio: "10:00", horaFim: "12:00" },
+        { id: 1, horaInicio: "10:00", horaFim: "12:00" },
+        { id: 1, horaInicio: "10:00", horaFim: "12:00" }
+      ]
     },
     {
       id: 2,
