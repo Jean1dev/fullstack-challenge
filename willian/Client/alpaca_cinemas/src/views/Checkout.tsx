@@ -62,17 +62,49 @@ const Checkout = () => {
         <div className="hero bg-custom-dark-blue min-h-screen">
           <div className="hero-content flex-col lg:flex-row">
             <div className="max-w-sm">
-              <p>Filme:</p>
-              <h1 className="text-2xl font-bold">
-                {programacoes![0].filme.title}
-              </h1>
-              <p>Cadeiras:</p>
-              <h1 className="text-2xl font-bold">01, 02, 03</h1>
-              <p>Horario:</p>
-              <h1 className="text-2xl font-bold">16H00</h1>
+              <div>
+                <p>Filme:</p>
+                <h1 className="text-2xl font-bold">
+                  {programacoes![0].filme.title}
+                </h1>
+                <p>Cadeiras:</p>
+                <h1 className="text-2xl font-bold">01, 02, 03</h1>
+                <p>Horario:</p>
+                <h1 className="text-2xl font-bold">16H00</h1>
+                <p>Combos:</p>
+                <h1 className="text-2xl font-bold">Chocolate</h1>
+              </div>
+              <div className="bg-custom-gray rounded flex flex-col p-4 gap-2 md:gap-2">
+                <table className="table">
+                  <tbody>
+                    <tr>
+                      <th>Ingressos inteira x2</th>
+                      <td>R$ 20.00</td>
+                    </tr>
+                    <tr>
+                      <th>Ingressos meia x1</th>
+                      <td>R$ 20.00</td>
+                    </tr>
+                    <tr>
+                      <th>Combos x1</th>
+                      <td>R$ 10.00</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr className="text-white bold text-[16px]">
+                      <th>Total</th>
+                      <td>R$ 50.00</td>
+                    </tr>
+                  </tfoot>
+                </table>
+                <button className="btn w-full bg-white text-custom-dark-blue">
+                  Comprar
+                </button>
+              </div>
             </div>
 
-            <div>
+            <div className="bg-custon-mid-blue rounded flex flex-col p-16 gap-6 md:gap-6">
+              <h1 className="text-2xl font-bold">Selecione sua cadeira:</h1>
               {rows.map((row, rowIndex) => (
                 <div key={rowIndex} className="flex justify-center mb-4">
                   {row.map((cadeira) => {
