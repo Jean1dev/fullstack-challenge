@@ -1,9 +1,11 @@
+import CriarIngressoReducer from "../reducers/CriarIngresso.reducer";
 import programacaoReducer from "../reducers/Programacao.reducer";
 import { configureStore } from "@reduxjs/toolkit";
 
 const store = configureStore({
   reducer: {
-    programacao: programacaoReducer
+    programacao: programacaoReducer,
+    criarIngresso: CriarIngressoReducer
   }
 });
 
