@@ -1,29 +1,58 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { Cadeira } from "../common/types/Cadeira";
 import CadeiraLivre from "../assets/cadeira_livre.svg";
 import CadeiraSelecionada from "../assets/cadeira_selecionada.svg";
 import CadeiraOcupada from "../assets/cadeira_ocupada.svg";
 import CheckoutOptions from "../components/ChekoutOptions";
+import { CriarIngresso } from "../common/types/CriarIngresso";
+import { useParams } from "react-router-dom";
 
 const Checkout = () => {
-  const [selectedRadio, setSelectedRadio] = useState("seg");
+  const dispatch = useDispatch();
+  const { id } = useParams<{ id: string }>();
+
+  const [selectedRadio, setSelectedRadio] = useState("");
   const [tipoIngresso, setTipoIngresso] = useState("");
+
+  const handleAddData = () => {
+    const ingreso: CriarIngresso = {
+      comboList: [1],
+      programacao: Number(id),
+      horario: Number(selectedRadio),
+      tipoIngresso: Number(tipoIngresso),
+      cadeira: 1,
+      nome: "Willian Costa",
+      documento: "12365478914"
+    };
+
+    dispatch({ type: "SET_INGRESSO", payload: ingreso });
+
+    getData();
+  };
+
+  const ingressos = useSelector(
+    (state: RootState) => state.criarIngresso.ingresso
+  );
+
+  const getData = () => {
+    console.log(ingressos);
+  };
 
   const programacoes = useSelector(
     (state: RootState) => state.programacao.programacao
   );
 
   const radioOptions = [
-    { label: "13h00", value: "seg" },
-    { label: "15h00", value: "ter" },
-    { label: "18h00", value: "qua" },
-    { label: "20h00", value: "qui" }
+    { label: "13h00", value: "1" },
+    { label: "15h00", value: "2" },
+    { label: "18h00", value: "3" },
+    { label: "20h00", value: "4" }
   ];
   const selectTipoIngresso = [
-    { label: "Ingresso inteira", value: "INTEIRA" },
-    { label: "Ingresso Meia entrada", value: "MEIA" }
+    { label: "Ingresso inteira", value: "1" },
+    { label: "Ingresso Meia entrada", value: "2" }
   ];
 
   const cadeiras: Cadeira[] = [
@@ -97,7 +126,10 @@ const Checkout = () => {
                     </tr>
                   </tfoot>
                 </table>
-                <button className="btn w-full bg-white text-custom-dark-blue">
+                <button
+                  onClick={handleAddData}
+                  className="btn w-full bg-white text-custom-dark-blue"
+                >
                   Comprar
                 </button>
               </div>
