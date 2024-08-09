@@ -12,6 +12,7 @@ import RadioGroup from "../../components/RadioGroup";
 import Select from "../../components/Select";
 import CountdownTimer from "../../components/CountdownTimer ";
 import { Programacao } from "../../common/types/Programacao";
+import Modal from "../../components/modal";
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,12 @@ const Checkout = () => {
 
   const [selectedRadio, setSelectedRadio] = useState("");
   const [tipoIngresso, setTipoIngresso] = useState("");
+  const [cadeira, setCadeira] = useState<number>();
+
+  const [isModalVisible, setModalVisible] = useState<boolean>(false);
+
+  const showModal = () => setModalVisible(true);
+  const hideModal = () => setModalVisible(false);
 
   const fetchProgramacao = (id: number): void => {
     setProg(programacoes!.find((programacao) => programacao.id === id));
@@ -35,7 +42,7 @@ const Checkout = () => {
       programacao: Number(id),
       horario: Number(selectedRadio),
       tipoIngresso: Number(tipoIngresso),
-      cadeira: 1,
+      cadeira: cadeira!,
       nome: "Willian Costa",
       documento: "12365478914"
     };
@@ -48,6 +55,11 @@ const Checkout = () => {
   const ingressos = useSelector(
     (state: RootState) => state.criarIngresso.ingresso
   );
+
+  const handleSelectCadeira = (cadeira: number) => {
+    showModal();
+    setCadeira(cadeira);
+  };
 
   const getData = () => {
     console.log(ingressos);
@@ -63,6 +75,7 @@ const Checkout = () => {
     { label: "18h00", value: "3" },
     { label: "20h00", value: "4" }
   ];
+
   const selectTipoIngresso = [
     { label: "Ingresso inteira", value: "1" },
     { label: "Ingresso Meia entrada", value: "2" }
@@ -70,15 +83,15 @@ const Checkout = () => {
 
   const cadeiras: Cadeira[] = [
     { id: 1, numero: 1, status: "livre" },
-    { id: 2, numero: 1, status: "Ocupada" },
-    { id: 3, numero: 1, status: "livre" },
-    { id: 4, numero: 1, status: "livre" },
-    { id: 5, numero: 1, status: "selecionada" },
-    { id: 6, numero: 1, status: "livre" },
-    { id: 7, numero: 1, status: "livre" },
-    { id: 8, numero: 1, status: "livre" },
-    { id: 9, numero: 1, status: "livre" },
-    { id: 10, numero: 1, status: "livre" }
+    { id: 2, numero: 2, status: "Ocupada" },
+    { id: 3, numero: 3, status: "livre" },
+    { id: 4, numero: 4, status: "livre" },
+    { id: 5, numero: 5, status: "selecionada" },
+    { id: 6, numero: 6, status: "livre" },
+    { id: 7, numero: 7, status: "livre" },
+    { id: 8, numero: 8, status: "livre" },
+    { id: 9, numero: 9, status: "livre" },
+    { id: 10, numero: 10, status: "livre" }
   ];
 
   const chunkArray = (arr: any[], size: number) => {
@@ -138,12 +151,17 @@ const Checkout = () => {
                       }
 
                       return (
-                        <img
+                        <button
+                          onClick={() => handleSelectCadeira(cadeira.numero)}
                           key={cadeira.id}
-                          src={src}
-                          alt="cadeira"
-                          className="mx-2 w-[60px] md:w-[120px] lg:w-[120px]"
-                        />
+                          disabled={cadeira.status === "Ocupada"}
+                        >
+                          <img
+                            src={src}
+                            alt="cadeira"
+                            className="mx-2 w-[60px] md:w-[120px] lg:w-[120px]"
+                          />
+                        </button>
                       );
                     })}
                   </div>
@@ -161,7 +179,7 @@ const Checkout = () => {
                       <p>Cadeiras:</p>
                       <h1 className="text-2xl font-bold">01, 02, 03</h1>
                       <p>Horario:</p>
-                      <h1 className="text-2xl font-bold">16H00</h1>
+                      <h1 className="text-2xl font-bold">{selectedRadio}</h1>
                       <p>Combos:</p>
                       <h1 className="text-2xl font-bold">Chocolate</h1>
                     </div>
@@ -203,6 +221,12 @@ const Checkout = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        isVisible={isModalVisible}
+        onClose={hideModal}
+        cadeira={cadeira!}
+      />
     </div>
   );
 };
