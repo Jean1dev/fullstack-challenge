@@ -17,7 +17,10 @@ const Card: React.FC<CardProps> = ({ filme, idProgramacao }) => {
         <h2 className="card-title">{filme.title}</h2>
         <p>{formatDateToBrazilian(filme.releaseDate)} - Sala 1</p>
         <div className="card-actions justify-start">
-          <button className="btn btn-primary hover:text-gray-100 bg-custom-blue text-custom-dark-blue border-0">
+          <button
+            onClick={() => navigate(`/checkout/${idProgramacao}`)}
+            className="btn btn-primary hover:text-gray-100 bg-custom-blue text-custom-dark-blue border-0"
+          >
             Comprar ingresso
           </button>
           <button

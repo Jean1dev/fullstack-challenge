@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { formatDateToBrazilian } from "../common/utils/DataConverter";
 import { Programacao } from "../common/types/Programacao";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProgramacaoDetail = () => {
   const [programacao, setProgramacao] = useState<Programacao>();
   const { id } = useParams<string>();
+  const navigate = useNavigate();
+
   const programacoes = useSelector(
     (state: RootState) => state.programacao.programacao
   );
@@ -54,7 +56,10 @@ const ProgramacaoDetail = () => {
                 ))}
               </div>
 
-              <button className="btn btn-primary hover:text-gray-100 bg-custom-blue text-custom-dark-blue border-0">
+              <button
+                onClick={() => navigate(`/checkout/${id}`)}
+                className="btn btn-primary hover:text-gray-100 bg-custom-blue text-custom-dark-blue border-0"
+              >
                 Comprar ingresso
               </button>
             </div>

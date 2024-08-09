@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { Cadeira } from "../../common/types/Cadeira";
@@ -11,13 +11,23 @@ import { useParams } from "react-router-dom";
 import RadioGroup from "../../components/RadioGroup";
 import Select from "../../components/Select";
 import CountdownTimer from "../../components/CountdownTimer ";
+import { Programacao } from "../../common/types/Programacao";
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<string>();
+  const [programacao, setProg] = useState<Programacao>();
 
   const [selectedRadio, setSelectedRadio] = useState("");
   const [tipoIngresso, setTipoIngresso] = useState("");
+
+  const fetchProgramacao = (id: number): void => {
+    setProg(programacoes!.find((programacao) => programacao.id === id));
+  };
+
+  useEffect(() => {
+    fetchProgramacao(Number(id));
+  }, []);
 
   const handleAddData = () => {
     const ingreso: CriarIngresso = {
@@ -146,7 +156,7 @@ const Checkout = () => {
                     <div className="mb-8 md:mb-72 lg:mb-72">
                       <p>Filme:</p>
                       <h1 className="text-2xl font-bold">
-                        {programacoes![0].filme.title}
+                        {programacao?.filme.title}
                       </h1>
                       <p>Cadeiras:</p>
                       <h1 className="text-2xl font-bold">01, 02, 03</h1>
