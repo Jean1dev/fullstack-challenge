@@ -30,7 +30,7 @@ const CountdownTimer = () => {
   };
 
   return (
-    <div className=" w-full max-w-xs">
+    <div className="max-w-xs text-end">
       <div className="label">
         <span className="label-text text-white">Finalize sua compra em:</span>
       </div>
