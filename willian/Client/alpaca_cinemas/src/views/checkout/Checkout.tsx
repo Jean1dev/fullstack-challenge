@@ -8,7 +8,6 @@ import CadeiraOcupada from "../../assets/cadeira_ocupada.svg";
 import TelaIcon from "../../assets/tela_icon.svg";
 import { CriarIngresso } from "../../common/types/CriarIngresso";
 import { useParams } from "react-router-dom";
-import "./checkout.module.css";
 import RadioGroup from "../../components/RadioGroup";
 import Select from "../../components/Select";
 import CountdownTimer from "../../components/CountdownTimer ";
