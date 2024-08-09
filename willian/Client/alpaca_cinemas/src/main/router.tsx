@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 
 const Home = lazy(() => import("../views/Home"));
 const ProgramacaoDetails = lazy(() => import("../views/ProgramacaoDetails"));
-const Checkout = lazy(() => import("../views/Checkout"));
+const Checkout = lazy(() => import("../views/checkout/Checkout"));
 
 const Router = () => {
   return (
@@ -18,10 +18,7 @@ const Router = () => {
             path="/programacao-details/:id"
             element={<ProgramacaoDetails />}
           />
-          <Route
-            path="/checkout/:id"
-            element={<Checkout />}
-          />
+          <Route path="/checkout/:id" element={<Checkout />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
