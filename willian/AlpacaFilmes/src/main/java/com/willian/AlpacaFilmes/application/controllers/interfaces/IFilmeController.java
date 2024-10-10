@@ -16,7 +16,7 @@ import java.util.List;
 public interface IFilmeController {
     @Operation(
             summary = "Endpoints para encontrar informações dos Filmes",
-            description = "Com esse endpoint você pode resgatar todas as informações relevatnes sobre os filmes",
+            description = "Com esse endpoint você pode resgatar todas as informações relevantes sobre os filmes",
             tags = {"Filmes"},
             responses = {
                     @ApiResponse(description = "Success", responseCode = "200",
