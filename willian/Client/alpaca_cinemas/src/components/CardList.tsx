@@ -1,20 +1,29 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
+import { Programacao } from "common/types/Programacao";
+import { getProgramacao } from "services/Filmes/Request";
+
 const CardList = () => {
-  const programacoes = useSelector(
-    (state: RootState) => state.programacao.programacao
-  );
+  const [programacoes, setProgramacoes] = useState<Programacao[]>();
+
+  const fetchFilmes = async () => {
+    const filmes = await getProgramacao();
+    console.log(filmes[0]);
+    setProgramacoes(filmes);
+  };
+
+  useEffect(() => {
+    fetchFilmes();
+  }, []);
 
   return (
     <div className="flex flex-wrap justify-center gap-4">
-      {programacoes!.map((programacao) => (
+      {programacoes?.map((programacao) => (
         <Card
           key={programacao.id}
           filme={programacao.filme}
-          idProgramacao={programacao.id}
+          programacao={programacao}
         />
       ))}
     </div>
