@@ -1,5 +1,5 @@
-import { Filme } from "common/types/Filme";
-import { Programacao } from "common/types/Programacao";
+import { Filme } from "../common/types/Filme";
+import { Programacao } from "../common/types/Programacao";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 

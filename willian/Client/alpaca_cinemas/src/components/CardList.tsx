@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
-import { Programacao } from "common/types/Programacao";
-import { getProgramacao } from "services/Filmes/Request";
+import { Programacao } from "../common/types/Programacao";
+import { getProgramacao } from "../services/Filmes/Request";
 
 const CardList = () => {
   const [programacoes, setProgramacoes] = useState<Programacao[]>();
 
   const fetchFilmes = async () => {
-    const filmes = await getProgramacao();
-    console.log(filmes[0]);
-    setProgramacoes(filmes);
+    const programacao = await getProgramacao();
+    setProgramacoes(programacao);
   };
 
   useEffect(() => {

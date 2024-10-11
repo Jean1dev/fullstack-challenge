@@ -1,3 +1,4 @@
+import { ErrorHandler } from "../common/types/ErrorHandler";
 import api from "../libs/axios";
 
 export const httpClient = {
@@ -8,7 +9,6 @@ export const httpClient = {
         .then((response) => response)
         .then(({ data }) => data);
     } catch (error) {
-      console.log("Erro na requisição:", error);
       return handleError(error);
     }
   },
@@ -34,10 +34,12 @@ export const httpClient = {
   }
 };
 
-function handleError(error: unknown): never {
+const handleError = (error: unknown): ErrorHandler => {
   if (error instanceof Error) {
-    console.error("API Error:", error.message);
-    throw new Error(`Erro ao fazer a requisição: ${error.message}`);
+    return {
+      message: `Erro ao fazer a requisição: ${error.message}`,
+      success: false
+    };
   }
-  throw new Error("Erro desconhecido ao fazer a requisição");
-}
+  return { message: "Erro desconhecido ao fazer a requisição", success: false };
+};
