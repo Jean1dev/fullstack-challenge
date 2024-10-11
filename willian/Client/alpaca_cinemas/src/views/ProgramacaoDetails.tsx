@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
-import { formatDateToBrazilian } from "../common/utils/DataConverter";
 import { Programacao } from "../common/types/Programacao";
 import { useNavigate, useParams } from "react-router-dom";
+import { getProgramacaoById } from "../services/Filmes/Request";
 
 const ProgramacaoDetail = () => {
-  const [programacao, setProgramacao] = useState<Programacao>();
+  const [programacao, setProgramacao] = useState<Programacao | null>();
   const { id } = useParams<string>();
   const navigate = useNavigate();
 
-  const programacoes = useSelector(
-    (state: RootState) => state.programacao.programacao
-  );
-  const fetchProgramacao = (id: number): void => {
-    setProgramacao(programacoes!.find((programacao) => programacao.id === id));
+  const fetchProgramacao = async (id: string) => {
+    const data = await getProgramacaoById(id);
+    if (data.message) {
+      setProgramacao(null);
+      return;
+    }
+
+    setProgramacao(data);
   };
 
   useEffect(() => {
-    fetchProgramacao(Number(id));
-  }, []);
+    id && fetchProgramacao(id);
+  }, [id]);
 
   return (
     <div className="hero bg-custom-dark-blue min-h-screen">
@@ -27,31 +28,39 @@ const ProgramacaoDetail = () => {
         {programacao ? (
           <>
             <img
-              src={`https://media.themoviedb.org/t/p/original/${
-                programacao!.filme.posterPath
-              }`}
+              src={`https://media.themoviedb.org/t/p/original/${programacao.filme.poster_path}`}
+              alt={programacao.filme.title}
               className="max-w-sm rounded-lg shadow-2xl"
             />
+
             <div>
-              <h1 className="text-5xl font-bold">{programacao!.filme.title}</h1>
-              <p>
-                Lançamento{" "}
-                {formatDateToBrazilian(programacao!.filme.releaseDate)}
+              <h1 className="text-5xl font-bold">{programacao.filme.title}</h1>
+
+              <p className="pt-4">
+                Lançamento {programacao.filme.release_date}
               </p>
+
               <div className="my-2">
                 <h4 className="text-[24px] font-bold">Sinopse</h4>
-                <p className="">{programacao!.filme.overview}</p>
+
+                <p className="">{programacao.filme.overview}</p>
               </div>
+
               <div className="my-2">
                 <h4 className="text-[24px] font-bold">
-                  Em exibição na sala {programacao!.sala.numero}
+                  Em exibição na sala {programacao.sala.numero}
                 </h4>
               </div>
+
               <div className="my-2">
                 <h4 className="text-[24px] font-bold">Horários:</h4>
-                {programacao!.horarios.map((horario) => (
-                  <div className="mx-1 badge badge-accent bg-custom-gray border-0">
-                    {horario.horaInicio}
+
+                {programacao.horarios.map((horario) => (
+                  <div
+                    key={horario.id}
+                    className="mx-1 badge badge-accent bg-custom-gray border-0"
+                  >
+                    <p className="text-white">{horario.horaInicio}</p>
                   </div>
                 ))}
               </div>
