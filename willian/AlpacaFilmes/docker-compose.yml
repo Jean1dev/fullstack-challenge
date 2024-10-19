@@ -29,9 +29,9 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/alpaca_filmes?useTimezone=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
-      the_movie_db: ${SUA_KEY_DO_THE_MOVEI_DB}
+      the_movie_db: "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYzJjNGM5YjllNjk1MDIwNTRmZGRmZDJmZTQxNzRkOSIsIm5iZiI6MTcyODQyNDI0MS42NzgwODksInN1YiI6IjY2NjlmNWU4MjEzYWFjMGFlMGQwNGJjMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CKIfZzrxUSjZdlYK7ySXmJZgrS6ZARX5XO6c7pyI0Hg"
     ports:
-      - 80:8080
+      - 3000:8080
     depends_on:
       - db
     networks:

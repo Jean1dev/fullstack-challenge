@@ -7,6 +7,11 @@ interface RadioGroupProps {
   onRadioChange: (value: string) => void;
 }
 
+export type TRadioOption = {
+  label: string;
+  value: string;
+};
+
 const RadioGroup: React.FC<RadioGroupProps> = ({
   options,
   selectedValue,

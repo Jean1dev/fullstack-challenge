@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { useDispatch } from "react-redux";
 import { Cadeira } from "../../common/types/Cadeira";
 import CadeiraLivre from "../../assets/cadeira_livre.svg";
 import CadeiraSelecionada from "../../assets/cadeira_selecionada.svg";
@@ -8,33 +7,56 @@ import CadeiraOcupada from "../../assets/cadeira_ocupada.svg";
 import TelaIcon from "../../assets/tela_icon.svg";
 import { CriarIngresso } from "../../common/types/CriarIngresso";
 import { useParams } from "react-router-dom";
-import RadioGroup from "../../components/RadioGroup";
+import RadioGroup, { TRadioOption } from "../../components/RadioGroup";
 import Select from "../../components/Select";
 import CountdownTimer from "../../components/CountdownTimer ";
 import { Programacao } from "../../common/types/Programacao";
 import Modal from "../../components/modal";
+import { getProgramacaoById } from "../../services/Filmes/Request";
+import { Horario } from "../../common/types/Horario";
+import { getTipoIngresso } from "../../services/Ingressos/Request";
+import { getCadeiras } from "../../services/Salas/request";
+
+type TTipoIngresso = {
+  id: number;
+  preco: number;
+  tipo_ingresso: string;
+};
 
 const Checkout = () => {
   const dispatch = useDispatch();
   const { id } = useParams<string>();
-  const [programacao, setProg] = useState<Programacao>();
+  const [programacao, setProgramacao] = useState<Programacao | null>();
 
   const [selectedRadio, setSelectedRadio] = useState("");
   const [tipoIngresso, setTipoIngresso] = useState("");
   const [cadeira, setCadeira] = useState<number>();
+  const [horarios, setHorarios] = useState<TRadioOption[]>([]);
+  const [selectTipoIngresso, setSelectTipoIngresso] = useState<TRadioOption[]>(
+    []
+  );
+  const [cadeiras, setCadeiras] = useState<Cadeira[]>([]);
 
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
 
   const showModal = () => setModalVisible(true);
   const hideModal = () => setModalVisible(false);
 
-  const fetchProgramacao = (id: number): void => {
-    setProg(programacoes!.find((programacao) => programacao.id === id));
+  const fetchProgramacao = async (id: string) => {
+    const data = await getProgramacaoById(id);
+    if (data.message) {
+      setProgramacao(null);
+      return;
+    }
+    fetchCadeiras(data.sala.id);
+    handleSetHorario(data.horarios);
+    setProgramacao(data);
   };
 
-  useEffect(() => {
-    fetchProgramacao(Number(id));
-  }, []);
+  const fetchCadeiras = async (id: number) => {
+    const data = await getCadeiras(id);
+    setCadeiras(data);
+  };
 
   const handleAddData = () => {
     const ingreso: CriarIngresso = {
@@ -48,51 +70,40 @@ const Checkout = () => {
     };
 
     dispatch({ type: "SET_INGRESSO", payload: ingreso });
-
-    getData();
   };
 
-  const ingressos = useSelector(
-    (state: RootState) => state.criarIngresso.ingresso
-  );
+  const handleSetHorario = (data: Horario[]) => {
+    const options: TRadioOption[] = [];
+    data.forEach((item) => {
+      options.push({ label: item.horaInicio, value: item.id.toString() });
+    });
+
+    setHorarios(options);
+  };
 
   const handleSelectCadeira = (cadeira: number) => {
     showModal();
     setCadeira(cadeira);
   };
 
-  const getData = () => {
-    console.log(ingressos);
+  const handleSelectTipoIngresso = (data: TTipoIngresso[]) => {
+    const filteredData: TRadioOption[] = [];
+
+    data.forEach((element: TTipoIngresso) => {
+      filteredData.push({
+        label: element.tipo_ingresso,
+        value: element.id.toString()
+      });
+    });
+
+    setSelectTipoIngresso(filteredData);
   };
 
-  const programacoes = useSelector(
-    (state: RootState) => state.programacao.programacao
-  );
+  const fetchTipoIngresso = async () => {
+    const data = await getTipoIngresso();
 
-  const radioOptions = [
-    { label: "13h00", value: "1" },
-    { label: "15h00", value: "2" },
-    { label: "18h00", value: "3" },
-    { label: "20h00", value: "4" }
-  ];
-
-  const selectTipoIngresso = [
-    { label: "Ingresso inteira", value: "1" },
-    { label: "Ingresso Meia entrada", value: "2" }
-  ];
-
-  const cadeiras: Cadeira[] = [
-    { id: 1, numero: 1, status: "livre" },
-    { id: 2, numero: 2, status: "Ocupada" },
-    { id: 3, numero: 3, status: "livre" },
-    { id: 4, numero: 4, status: "livre" },
-    { id: 5, numero: 5, status: "selecionada" },
-    { id: 6, numero: 6, status: "livre" },
-    { id: 7, numero: 7, status: "livre" },
-    { id: 8, numero: 8, status: "livre" },
-    { id: 9, numero: 9, status: "livre" },
-    { id: 10, numero: 10, status: "livre" }
-  ];
+    handleSelectTipoIngresso(data);
+  };
 
   const chunkArray = (arr: any[], size: number) => {
     const result = [];
@@ -104,6 +115,18 @@ const Checkout = () => {
 
   const rows = chunkArray(cadeiras, 3);
 
+  useEffect(() => {
+    if (id) {
+      fetchProgramacao(id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
+  useEffect(() => {
+    fetchTipoIngresso();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="hero bg-custom-dark-blue min-h-screen">
       <div className="hero-content text-center">
@@ -112,7 +135,7 @@ const Checkout = () => {
             <div className="flex items-center flex flex-wrap gap-6 md:gap-6">
               <div className="flex gap-2 ">
                 <RadioGroup
-                  options={radioOptions}
+                  options={horarios}
                   selectedValue={selectedRadio}
                   onRadioChange={setSelectedRadio}
                 />
@@ -122,7 +145,6 @@ const Checkout = () => {
                   options={selectTipoIngresso}
                   label={"Tipo de ingresso:"}
                   onChange={setTipoIngresso}
-                  value={selectTipoIngresso[0].value}
                 />
               </div>
             </div>
@@ -179,7 +201,14 @@ const Checkout = () => {
                       <p>Cadeiras:</p>
                       <h1 className="text-2xl font-bold">01, 02, 03</h1>
                       <p>Horario:</p>
-                      <h1 className="text-2xl font-bold">{selectedRadio}</h1>
+
+                      <h1 className="text-2xl font-bold">
+                        {horarios.map((horario) => {
+                          return horario.value === selectedRadio
+                            ? horario.label
+                            : "";
+                        })}
+                      </h1>
                       <p>Combos:</p>
                       <h1 className="text-2xl font-bold">Chocolate</h1>
                     </div>

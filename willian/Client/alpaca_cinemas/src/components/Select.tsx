@@ -4,7 +4,7 @@ interface SelectProps {
   options: { label: string; value: string }[];
   onChange: (value: string) => void;
   label: string;
-  value: string;
+  value?: string;
 }
 
 const Select: React.FC<SelectProps> = ({ options, onChange, label, value }) => {
