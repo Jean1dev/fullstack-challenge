@@ -1,0 +1,15 @@
+retry:
+  MAX_RETRIES: 3
+  RETRY_DELAY_MS: 100
+
+server:
+  port: 8888
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+      show-sql: false
+

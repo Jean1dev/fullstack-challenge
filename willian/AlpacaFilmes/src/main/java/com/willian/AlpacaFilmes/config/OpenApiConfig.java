@@ -1,0 +1,17 @@
+package com.willian.AlpacaFilmes.config;
+
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class OpenApiConfig {
+    @Bean
+    OpenAPI customOpenAPI() {
+        return new OpenAPI().info(new Info().title("AlpacaFilmes API").version("V1")
+                .description("Alpaca Filmes Sistema de reserva para o cimema.").termsOfService("https://pub.willian.com.br/API")
+                .license(new License().name("Apache 2.0").url("https://pub.willian.com.br/API")));
+    }
+}
